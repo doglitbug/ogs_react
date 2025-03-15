@@ -4,11 +4,12 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
+  ScrollRestoration
 } from "react-router";
 
 import type { Route } from "./+types/root";
-import "./app.css";
+import Navigation from "./components/Navigation";
+import "./app.css"
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -21,7 +22,30 @@ export const links: Route.LinksFunction = () => [
     rel: "stylesheet",
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
+  {
+    rel: "stylesheet",
+    href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
+    integrity: "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH",
+    crossOrigin: "anonymous",
+  },
+  {
+    rel: "script",
+    href: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js",
+  },
+  {
+    rel: "script",
+    href: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
+  },
+  {
+    rel: "script",
+    href: "https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
+  },
 ];
+
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -42,7 +66,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Navigation />
+      <Outlet />
+      <div>Footer</div>
+    </>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
