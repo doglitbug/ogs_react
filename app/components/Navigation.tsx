@@ -1,35 +1,40 @@
-import ReactNode from 'react';
-import Container from 'react-bootstrap/Container';
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+
+const loggedIn: boolean = true;
 
 type ISection = {
   name: string,
   location: string,
 }
 let sections: ISection[] = [
-  { name: "Garage", location: "/garage" },
-  { name: "Garage", location: "/garage" },
-  { name: "Logout", location: "/logout" },
+  { name: "Garages", location: "/garage" },
+  { name: "Garages: 1", location: "/garage/1" },
+  { name: "Items", location: "/item" },
+  { name: "Users", location: "/user" },
 ];
 
-//TODO Remove routes that are Admin/Logged in/Logged out
-//eg if (!loggedIn)
-//sections = sections.filter(e => e.name !== "Logout");
+if (loggedIn) {
+  sections.push({ name: "Profile", location: "/profile" });
+  sections.push({ name: "Logout", location: "/logout" });
+} else {
+  sections.push({ name: "Login", location: "/login" });
+}
 
+sections.push({ name: "About", location: "/about" });
+
+//sections = sections.filter(e => e.name !== "Logout");
 
 export default function Navigation() {
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
-      <Container>
-        <Navbar.Brand href="/">Online Garage Sale</Navbar.Brand>
-        <Nav className="me-auto">
-          {sections.map((section)=>{
-            return (<Nav.Link href={section.location}>{section.name}</Nav.Link>);
-          })}
-        </Nav>
-      </Container>
+    <Navbar>
+      <Navbar.Brand href="/">Online Garage Sale</Navbar.Brand>
+      <Nav className="me-auto">
+        {sections.map((section) => {
+          return (<Nav.Link href={section.location}>{section.name}</Nav.Link>);
+        })}
+      </Nav>
     </Navbar>
-
   );
 }
