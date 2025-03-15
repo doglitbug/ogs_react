@@ -4,7 +4,6 @@ body {
 
 .container {
     padding-top: 10px;
-    margin: 5px;
 }
 
 nav.navbar {
@@ -60,4 +59,8 @@ div.images img {
 
 i.bi {
     padding-right: 5px;
+}
+
+.about>li {
+    list-style-type: square;
 }

@@ -31,8 +31,8 @@ export default function Navigation() {
     <Navbar>
       <Navbar.Brand href="/">Online Garage Sale</Navbar.Brand>
       <Nav className="me-auto">
-        {sections.map((section) => {
-          return (<Nav.Link href={section.location}>{section.name}</Nav.Link>);
+        {sections.map((section, index) => {
+          return (<Nav.Link key={index} href={section.location}>{section.name}</Nav.Link>);
         })}
       </Nav>
     </Navbar>

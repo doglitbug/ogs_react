@@ -11,6 +11,7 @@ import type { Route } from "./+types/root";
 import Navigation from "./components/Navigation";
 import "./app.css"
 import "./public.css"
+import { Spinner } from "react-bootstrap";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -78,6 +79,11 @@ export default function App() {
     </>
   );
 }
+
+export function HydrateFallback(){
+  return <Spinner animation="border" />;
+}
+
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
