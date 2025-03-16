@@ -2,11 +2,14 @@ import type { Route } from "./+types/garage";
 import { Link } from 'react-router'
 
 export async function clientLoader({ params }: Route.LoaderArgs) {
+    const myHeaders = new Headers()
+    myHeaders.append("Content-Type", "application/json")
+    const token = localStorage.getItem('jwt-token')
+    if (token) myHeaders.append("Authorization", `Bearer ${token}`)
 
+    //TODO Check for and ID, if there isn;t one get all garages
     const res = await fetch(`http://doglitbug.com:82/api/v1/garage/${params.garageId}`, {
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: myHeaders
     });
     const garage = await res.json();
     return garage.data;
@@ -68,7 +71,7 @@ function showGarage(garage: any) {
                     <h2>Contact:</h2>
                     <table className="table table-hover">
                         <tbody>
-                        <tr><td>This is only available to registered users.<br />Please click <Link to="/login">here</Link> to log in or sign up</td></tr>
+                            <tr><td>This is only available to registered users.<br />Please click <Link to="/login">here</Link> to log in or sign up</td></tr>
                         </tbody>
                     </table>
                 </div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Route } from "./+types/logout";
 
 export function meta({ }: Route.MetaArgs) {
@@ -8,9 +9,11 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Logout() {
+    localStorage.removeItem('jwt-token')
     return (
         <>
             <h1>Logout</h1>
+            <p>You have been logged out, please click <Link to="/login">here</Link> to log back in </p>
         </>
     )
 }

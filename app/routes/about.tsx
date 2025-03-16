@@ -17,15 +17,14 @@ export default function About() {
             </p>
 
             <h2>What are the rules?</h2>
-            <p>
-                <ul className="about">
-                    <li>Don't be a dick</li>
-                    <li>Don't harrass people</li>
-                    <li>Be polite</li>
-                    <li>Nobody owes you anything, but please also be considerate of other people's time!</li>
-                    <li>Don't list anything illegal: guns, drugs etc</li>
-                </ul>
-            </p>
+
+            <ul className="about">
+                <li>Don't be a dick</li>
+                <li>Don't harrass people</li>
+                <li>Be polite</li>
+                <li>Nobody owes you anything, but please also be considerate of other people's time!</li>
+                <li>Don't list anything illegal: guns, drugs etc</li>
+            </ul>
 
             <h2>Privacy policy</h2>
         </>
