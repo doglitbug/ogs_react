@@ -2,17 +2,14 @@ import type { Route } from "./+types/garage";
 import { Link } from 'react-router'
 
 export async function clientLoader({ params }: Route.LoaderArgs) {
-    const garageId = params.garageId;
-    if(!garageId) return null;
 
-    const garage = {
-        garageId: garageId,
-        name: "PAR Garage",
-        description: "We need to have a garage sale before we move! Please contact owners for sales not workers",
-        location: "Dunedin",
-        visible: true,
-    }
-    return { garage }
+    const res = await fetch(`http://doglitbug.com:82/api/v1/garage/${params.garageId}`, {
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const garage = await res.json();
+    return garage.data;
 }
 
 export async function clientAction() {
@@ -27,8 +24,8 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Garage({ loaderData }: Route.ComponentProps) {
-    if (loaderData!=null) {
-        return showGarage(loaderData.garage);
+    if (loaderData != null) {
+        return showGarage(loaderData);
     }
 
     return (
@@ -70,7 +67,9 @@ function showGarage(garage: any) {
                 <div className="col-md-6">
                     <h2>Contact:</h2>
                     <table className="table table-hover">
+                        <tbody>
                         <tr><td>This is only available to registered users.<br />Please click <Link to="/login">here</Link> to log in or sign up</td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 import "./app.css"
 import "./public.css"
 import { Spinner } from "react-bootstrap";
@@ -73,17 +74,15 @@ export default function App() {
       <Navigation />
       <div className="container">
         <Outlet />
-
-        <div>Footer</div>
       </div>
+      <Footer />
     </>
   );
 }
 
-export function HydrateFallback(){
+export function HydrateFallback() {
   return <Spinner animation="border" />;
 }
-
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
