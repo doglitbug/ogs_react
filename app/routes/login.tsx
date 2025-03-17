@@ -3,6 +3,8 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router";
+import { useAuth } from "../context/useAuth"
+
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -14,30 +16,12 @@ export function meta({ }: Route.MetaArgs) {
 export default function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    let navigate = useNavigate();
+    let navigate = useNavigate()
+    const { loginUser } = useAuth()
 
-    function handleSubmit(event: { preventDefault: () => void; }) {
-        event.preventDefault();
-
-        fetch('http://doglitbug.com:82/api/v1/login', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        })
-            .then((response) => { return response.json() })
-            .then((data) => {
-                if (data.message === 'success') {
-                    localStorage.setItem('jwt-token', data.token)
-                    setUsername('')
-                    setPassword('')
-                    //TODO Or previous page?
-                    navigate('/profile')
-                } else {
-                    alert(data.message)
-                }
-            })
+    function handleSubmit(event: { preventDefault: () => void }) {
+        event.preventDefault()
+        loginUser(username, password)
     }
 
     return (

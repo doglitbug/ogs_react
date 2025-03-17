@@ -1,11 +1,11 @@
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useAuth } from "../context/useAuth"
 
 export default function Navigation() {
-  const token = localStorage.getItem('jwt-token')
-  const loggedIn: boolean = (!!token);
-  
+  const { isLoggedIn } = useAuth()
+
   type ISection = {
     name: string,
     location: string,
@@ -15,15 +15,15 @@ export default function Navigation() {
     { name: "Garages: 1", location: "/garage/1" },
     { name: "Items", location: "/item" },
   ];
-  
-  if (loggedIn) {
+
+  if (isLoggedIn()) {
     sections.push({ name: "Users", location: "/user" });
     sections.push({ name: "Profile", location: "/profile" });
     sections.push({ name: "Logout", location: "/logout" });
   } else {
     sections.push({ name: "Login", location: "/login" });
   }
-  
+
   sections.push({ name: "About", location: "/about" });
 
   return (

@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/logout";
+import { useAuth } from "../context/useAuth"
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -9,7 +10,8 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Logout() {
-    localStorage.removeItem('jwt-token')
+    const { logoutUser } = useAuth()
+    logoutUser
     return (
         <>
             <h1>Logout</h1>

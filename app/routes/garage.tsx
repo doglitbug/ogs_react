@@ -7,7 +7,7 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
     const token = localStorage.getItem('jwt-token')
     if (token) myHeaders.append("Authorization", `Bearer ${token}`)
 
-    //TODO Check for and ID, if there isn;t one get all garages
+    //TODO Check for and ID, if there isn't one get all garages
     const res = await fetch(`http://doglitbug.com:82/api/v1/garage/${params.garageId}`, {
         headers: myHeaders
     });

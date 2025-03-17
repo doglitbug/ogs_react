@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import "./app.css"
 import "./public.css"
 import { Spinner } from "react-bootstrap";
+import { UserProvider } from "./context/useAuth";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -70,11 +71,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <>
-      <Navigation />
-      <div className="container">
-        <Outlet />
-      </div>
-      <Footer />
+      <UserProvider>
+        <Navigation />
+        <div className="container">
+          <Outlet />
+        </div>
+        <Footer />
+      </UserProvider>
     </>
   );
 }
