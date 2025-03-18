@@ -7,7 +7,7 @@ type UserContextType = {
     token: string | null;
     //registerUser(username: string, email: string, password: string) => void;
     loginUser: (username: string, password: string) => void;
-    logout: () => void;
+    logoutUser: () => void;
     isLoggedIn: () => boolean;
     //isAdmin: () => boolean;
 };
@@ -47,7 +47,7 @@ export const UserProvider = ({ children }: Props) => {
             .then((data) => {
                 if (data.message === 'success') {
                     localStorage.setItem('token', data.token)
-                    setToken(data.token);
+                    setToken(data.token)
                     navigate('/profile')
                 } else {
                     alert(data.message)
@@ -59,13 +59,17 @@ export const UserProvider = ({ children }: Props) => {
         return !!token;
     }
 
-    const logout = () => {
-        localStorage.removeItem("token");
-        setToken("");
+    const logoutUser = () => {
+        //Added useEffect to stop Cannot update a component while rendering a different component warning
+        //https://stackoverflow.com/questions/62336340/cannot-update-a-component-while-rendering-a-different-component-warning
+        useEffect(()=>{
+            localStorage.removeItem("token")
+            setToken("")
+        })
     }
 
     return (
-        <UserContext.Provider value={{ loginUser, token, isLoggedIn, logout }}>
+        <UserContext.Provider value={{ loginUser, token, isLoggedIn, logoutUser }}>
             {isReady ? children : null}
         </UserContext.Provider>
     );

@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router";
 import { useAuth } from "../context/useAuth"
 
-
 export function meta({ }: Route.MetaArgs) {
     return [
         { title: "Online Garage Sale" },

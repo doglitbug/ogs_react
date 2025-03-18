@@ -11,7 +11,7 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function Logout() {
     const { logoutUser } = useAuth()
-    logoutUser
+    logoutUser()
     return (
         <>
             <h1>Logout</h1>
