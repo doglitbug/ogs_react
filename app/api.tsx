@@ -29,12 +29,6 @@ async function doGetCall(api: string, body: string) {
  */
 export const getGarage = async (id: string) => {
     return doGetCall("garage/"+id, "");
-
-    const res = await fetch(`http://doglitbug.com:82/api/v1/garage/${id}`, {
-        headers: headers()
-    });
-    const garage = await res.json();
-    return garage.data;
 }
 
 /**
@@ -42,11 +36,7 @@ export const getGarage = async (id: string) => {
  * @returns 
  */
 export const getGarages = async () => {
-    const res = await fetch(`http://doglitbug.com:82/api/v1/garage/}`, {
-        headers: headers()
-    });
-    const garage = await res.json();
-    return garage.data;
+    return doGetCall("garage/", "");
 }
 
 //#endregion

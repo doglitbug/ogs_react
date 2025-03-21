@@ -1,6 +1,6 @@
 import type { Route } from "./+types/garage";
 import { Link } from 'react-router'
-import { getGarage } from "../api";
+import { getGarage } from "~/api";
 
 export async function clientLoader({ params }: Route.LoaderArgs) {
     return getGarage(params.garageId ? params.garageId : "");
@@ -18,7 +18,6 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Garage({ loaderData }: Route.ComponentProps) {
-    console.log(loaderData);
     if (loaderData != null && loaderData.status==200) {
         return showGarage(loaderData.data.garage);
     } else {
