@@ -1,4 +1,4 @@
-import type { Route } from "./+types/garage";
+import type { Route } from "../../../.react-router/types/app/routes/garage/+types";
 import { Link } from 'react-router'
 import { getGarage } from "~/api";
 
@@ -17,7 +17,7 @@ export function meta({ }: Route.MetaArgs) {
     ];
 }
 
-export default function Garage({ loaderData }: Route.ComponentProps) {
+export default function Show({ loaderData }: Route.ComponentProps) {
     if (loaderData != null && loaderData.status==200) {
         return showGarage(loaderData.data.garage);
     } else {

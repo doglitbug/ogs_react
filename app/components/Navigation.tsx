@@ -1,7 +1,7 @@
 
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useAuth } from "../context/useAuth"
+import { useAuth } from "~/context/useAuth"
 
 export default function Navigation() {
   const { isLoggedIn } = useAuth()
