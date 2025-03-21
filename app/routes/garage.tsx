@@ -1,18 +1,9 @@
 import type { Route } from "./+types/garage";
 import { Link } from 'react-router'
+import { getGarage } from "../api";
 
 export async function clientLoader({ params }: Route.LoaderArgs) {
-    const myHeaders = new Headers()
-    myHeaders.append("Content-Type", "application/json")
-    const token = localStorage.getItem('jwt-token')
-    if (token) myHeaders.append("Authorization", `Bearer ${token}`)
-
-    //TODO Check for and ID, if there isn't one get all garages
-    const res = await fetch(`http://doglitbug.com:82/api/v1/garage/${params.garageId}`, {
-        headers: myHeaders
-    });
-    const garage = await res.json();
-    return garage.data;
+    return getGarage(params.garageId ? params.garageId : "");
 }
 
 export async function clientAction() {
@@ -27,15 +18,17 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Garage({ loaderData }: Route.ComponentProps) {
-    if (loaderData != null) {
-        return showGarage(loaderData);
+    console.log(loaderData);
+    if (loaderData != null && loaderData.status==200) {
+        return showGarage(loaderData.data.garage);
+    } else {
+        return (
+            <>
+                <h1>Garages</h1>
+                <p>Not found</p>
+            </>
+        )
     }
-
-    return (
-        <>
-            <h1>Garages</h1>
-        </>
-    )
 }
 
 function showGarage(garage: any) {
@@ -71,7 +64,7 @@ function showGarage(garage: any) {
                     <h2>Contact:</h2>
                     <table className="table table-hover">
                         <tbody>
-                            <tr><td>This is only available to registered users.<br />Please click <Link to="/login">here</Link> to log in or sign up</td></tr>
+                            <tr><td> This is only available to registered users.<br />Please click <Link to="/login">here</Link> to log in or sign up</td></tr>
                         </tbody>
                     </table>
                 </div>
