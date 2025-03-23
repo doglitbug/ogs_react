@@ -1,4 +1,3 @@
-
 const baseURL = 'http://doglitbug.com:82/api/v1/'
 /**
  * Headers to apply to all API call after logging in 
@@ -12,7 +11,7 @@ const headers = () => {
     return myHeaders
 }
 
-async function doGetCall(api: string, body: string) {
+async function doGetCall(api: string) {
     const response = await fetch(baseURL + api, {
         headers: headers(),
     })
@@ -28,7 +27,7 @@ async function doGetCall(api: string, body: string) {
  * @returns 
  */
 export const getGarage = async (id: string) => {
-    return doGetCall("garage/"+id, "");
+    return doGetCall("garage/"+id);
 }
 
 /**
@@ -36,7 +35,24 @@ export const getGarage = async (id: string) => {
  * @returns 
  */
 export const getGarages = async () => {
-    return doGetCall("garage/", "");
+    return doGetCall("garage/");
+}
+//#endregion
+
+//#region Items
+/**
+ * Get data for a item
+ * @returns
+ */
+export const getItem = async (id: string) => {
+    return doGetCall("item/"+id);
 }
 
+/**
+ * Get data for all Items
+ * @returns
+ */
+export const getItems = async () => {
+    return doGetCall("item/");
+}
 //#endregion

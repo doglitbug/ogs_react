@@ -1,4 +1,5 @@
-export type UserProfile = {
+export type UserPreview = {
     username: string;
     email: string;
+    user_id: number;
 };

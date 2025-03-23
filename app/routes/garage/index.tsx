@@ -1,8 +1,7 @@
 import type {Route} from "../../../.react-router/types/app/routes/garage/+types";
 import {getGarages} from "~/api";
-import GaragePreview from "~/components/Garage";
-import type {garagePreview} from "~/components/Garage";
-
+import ShowGaragePreview from "~/components/Garage";
+import type {garagePreview} from "~/models/Garage";
 
 export async function clientLoader({params}: Route.LoaderArgs) {
     return getGarages();
@@ -34,9 +33,11 @@ function showGarages(garages: garagePreview[]) {
             <h1>All Garages</h1>
             <div className="row">
                 {garages.map(function (garage: garagePreview) {
-                    return <div className="col-lg-3 col-md-6">
-                        <GaragePreview garage={garage}/>
-                    </div>
+                    return (
+                        <div className="col-lg-3 col-md-6" key={garage.garage_id}>
+                            <ShowGaragePreview garage={garage}/>
+                        </div>
+                    )
                 })}
             </div>
         </>

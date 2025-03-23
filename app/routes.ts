@@ -6,7 +6,9 @@ export default [
         index("routes/garage/index.tsx"),
         route(":garageId", "routes/garage/show.tsx"),
     ]),
-    route("item", "routes/item.tsx"),
+    ...prefix("item", [
+        route(":itemId", "routes/item/show.tsx"),
+    ]),
     route("user", "routes/user.tsx"),
     route("profile", "routes/profile.tsx"),
     route("login", "routes/login.tsx"),

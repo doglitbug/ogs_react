@@ -1,13 +1,9 @@
 import type { Route } from "../../../.react-router/types/app/routes/garage/+types";
-import { Link } from 'react-router'
 import { getGarage } from "~/api";
+import {ShowGarage} from "~/components/Garage";
 
 export async function clientLoader({ params }: Route.LoaderArgs) {
     return getGarage(params.garageId ? params.garageId : "");
-}
-
-export async function clientAction() {
-
 }
 
 export function meta({ }: Route.MetaArgs) {
@@ -19,7 +15,7 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function Show({ loaderData }: Route.ComponentProps) {
     if (loaderData != null && loaderData.status==200) {
-        return showGarage(loaderData.data.garage);
+        return ShowGarage(loaderData.data.garage);
     } else {
         return (
             <>
@@ -28,46 +24,4 @@ export default function Show({ loaderData }: Route.ComponentProps) {
             </>
         )
     }
-}
-
-function showGarage(garage: any) {
-    return (
-        <>
-            <h1>Show Garage: {garage['name']}</h1>
-            <div className="row">
-                <div className="col-md-6">
-                    <h2>Details:</h2>
-                    <table className="table table-hover">
-                        <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <td>{garage['name']}</td>
-                            </tr>
-                            <tr>
-                                <th>Location</th>
-                                <td>{garage['location']}</td>
-                            </tr>
-                            <tr>
-                                <th>Visible</th>
-                                <td>{garage['visible'] ? 'Visible to public' : 'Hidden from public'}</td>
-                            </tr>
-
-                            <tr>
-                                <th>Description</th>
-                                <td>{garage['description']}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className="col-md-6">
-                    <h2>Contact:</h2>
-                    <table className="table table-hover">
-                        <tbody>
-                            <tr><td> This is only available to registered users.<br />Please click <Link to="/login">here</Link> to log in or sign up</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </>
-    )
 }

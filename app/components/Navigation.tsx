@@ -1,39 +1,43 @@
-
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { useAuth } from "~/context/useAuth"
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import {useAuth} from "~/context/useAuth"
 
 export default function Navigation() {
-  const { isLoggedIn } = useAuth()
+    const {isLoggedIn} = useAuth()
 
-  type ISection = {
-    name: string,
-    location: string,
-  }
-  let sections: ISection[] = [
-    { name: "Garages", location: "/garage" },
-    { name: "Garages: 1", location: "/garage/1" },
-    { name: "Items", location: "/item" },
-  ];
+    type ISection = {
+        name: string,
+        location: string,
+    }
+    let sections: ISection[] = [
+        {name: "Garages", location: "/garage"},
+        {name: "Items", location: "/item"},
+    ];
 
-  if (isLoggedIn()) {
-    sections.push({ name: "Users", location: "/user" });
-    sections.push({ name: "Profile", location: "/profile" });
-    sections.push({ name: "Logout", location: "/logout" });
-  } else {
-    sections.push({ name: "Login", location: "/login" });
-  }
 
-  sections.push({ name: "About", location: "/about" });
+    return (
+        <Navbar sticky="top">
+            <Navbar.Brand href="/">Online Garage Sale</Navbar.Brand>
+            <Nav className="me-auto">
+                <Nav.Link key={"garages"} href="/garage">Garages</Nav.Link>
+                <Nav.Link key={"items"} href="/item">Items</Nav.Link>
+            </Nav>
+            <Nav className="justify-content-end">
+                {isLoggedIn() ? profileLinks() : <Nav.Link key="login" href="/login">Log in</Nav.Link>}
+            </Nav>
+        </Navbar>
+    );
+}
 
-  return (
-    <Navbar>
-      <Navbar.Brand href="/">Online Garage Sale</Navbar.Brand>
-      <Nav className="me-auto">
-        {sections.map((section, index) => {
-          return (<Nav.Link key={index} href={section.location}>{section.name}</Nav.Link>);
-        })}
-      </Nav>
-    </Navbar>
-  );
+function profileLinks() {
+    return (
+        <NavDropdown title="Signed in as Arron Dick" id="user-dropdown">
+            <Nav.Link href="/profile">Profile</Nav.Link>
+            <NavDropdown.Divider/>
+            <NavDropdown.Item href="/logout">
+                Log out
+            </NavDropdown.Item>
+        </NavDropdown>
+    )
 }
