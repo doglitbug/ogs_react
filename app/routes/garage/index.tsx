@@ -1,7 +1,7 @@
 import type {Route} from "../../../.react-router/types/app/routes/garage/+types";
 import {getGarages} from "~/api";
 import ShowGaragePreview from "~/components/Garage";
-import type {garagePreview} from "~/models/Garage";
+import type {garagePreview} from "~/models/all";
 
 export async function clientLoader({params}: Route.LoaderArgs) {
     return getGarages();

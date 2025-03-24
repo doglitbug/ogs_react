@@ -9,6 +9,7 @@ export default [
     ...prefix("item", [
         route(":itemId", "routes/item/show.tsx"),
     ]),
+    route("search", "routes/search.tsx"),
     route("user", "routes/user.tsx"),
     route("profile", "routes/profile.tsx"),
     route("login", "routes/login.tsx"),

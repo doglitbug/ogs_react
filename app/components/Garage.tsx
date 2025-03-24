@@ -1,6 +1,6 @@
 import Card from 'react-bootstrap/Card';
 import {Link} from "react-router";
-import type {garagePreview, garage} from "~/models/Garage";
+import type {garagePreview, garage} from "~/models/all";
 
 interface previewProps {
     garage: garagePreview;

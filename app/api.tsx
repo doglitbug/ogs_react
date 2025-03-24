@@ -1,7 +1,7 @@
 const baseURL = 'http://doglitbug.com:82/api/v1/'
 /**
- * Headers to apply to all API call after logging in 
- * @returns Headers with bearer token 
+ * Headers to apply to all API call after logging in
+ * @returns Headers with bearer token
  */
 const headers = () => {
     const myHeaders = new Headers()
@@ -15,7 +15,7 @@ async function doGetCall(api: string) {
     const response = await fetch(baseURL + api, {
         headers: headers(),
     })
-    
+
     const statusCode = response.status;
     const data = await response.json();
     return {status: statusCode, data: data}
@@ -24,15 +24,15 @@ async function doGetCall(api: string) {
 //#region Garages
 /**
  * Get data for a Garage
- * @returns 
+ * @returns
  */
 export const getGarage = async (id: string) => {
-    return doGetCall("garage/"+id);
+    return doGetCall("garage/" + id);
 }
 
 /**
  * Get data for all Garages
- * @returns 
+ * @returns
  */
 export const getGarages = async () => {
     return doGetCall("garage/");
@@ -45,7 +45,7 @@ export const getGarages = async () => {
  * @returns
  */
 export const getItem = async (id: string) => {
-    return doGetCall("item/"+id);
+    return doGetCall("item/" + id);
 }
 
 /**
@@ -54,5 +54,16 @@ export const getItem = async (id: string) => {
  */
 export const getItems = async () => {
     return doGetCall("item/");
+}
+//#endregion
+
+//#region Search
+
+/**
+ * Get data for all Items
+ * @returns
+ */
+export const getSearch = async (search: string) => {
+    return doGetCall("search?search=" + search);
 }
 //#endregion

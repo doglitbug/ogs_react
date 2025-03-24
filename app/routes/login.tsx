@@ -2,8 +2,7 @@ import type { Route } from "./+types/login";
 import { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from "react-router";
-import { useAuth } from "../context/useAuth"
+import { useAuth } from "~/context/useAuth"
 
 export function meta({ }: Route.MetaArgs) {
     return [
@@ -13,9 +12,8 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function Login() {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    let navigate = useNavigate()
+    const [username, setUsername] = useState('doglitbug')
+    const [password, setPassword] = useState('1')
     const { loginUser } = useAuth()
 
     function handleSubmit(event: { preventDefault: () => void }) {

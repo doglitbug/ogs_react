@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import type { UserProfile } from "../models/User";
 import { useNavigate } from "react-router";
 
 type UserContextType = {
