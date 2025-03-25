@@ -49,9 +49,9 @@ export default function Navigation() {
 
 function profileLinks() {
     return (
-        <NavDropdown title="Account" id="user-dropdown">
-            <Navbar.Text>Arron Dick</Navbar.Text>
-            <Nav.Link href="/profile">Profile</Nav.Link>
+       <NavDropdown title="Account" id="user-dropdown" align="end">
+           <NavDropdown.ItemText>Arron Dick</NavDropdown.ItemText>
+            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Divider/>
             <NavDropdown.Item href="/logout">
                 Log out

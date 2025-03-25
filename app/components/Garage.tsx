@@ -1,6 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import {Link} from "react-router";
 import type {garagePreview, garage} from "~/models/all";
+import {shortenText} from "~/components/Misc";
 
 interface previewProps {
     garage: garagePreview;
@@ -8,12 +9,12 @@ interface previewProps {
 export default function ShowGaragePreview(props: previewProps) {
     const {garage} = props;
     return (
-        <Card className="garagePreview">
+        <Card className="mb-6 garagePreview">
             <Card.Body>
                 <Card.Title>{garage['name']}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{garage['location']}</Card.Subtitle>
                 <Card.Text>
-                    {garage['description']}
+                    {shortenText(garage['description'])}
                 </Card.Text>
                 <Link to={`/garage/${garage['garage_id']}`}>Go to Garage</Link>
             </Card.Body>

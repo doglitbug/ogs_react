@@ -65,3 +65,7 @@ i.bi {
 .about>li {
     list-style-type: square;
 }
+
+.garagePreview, .searchResult {
+    min-height: 250px;
+}
