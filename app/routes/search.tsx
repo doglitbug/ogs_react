@@ -6,7 +6,11 @@ import {ShowSearchResult} from "~/components/SearchResult";
 export async function clientLoader({params, request}: Route.LoaderArgs) {
     const searchParams = new URL(request.url).searchParams;
     let searchTerm = searchParams.get("q");
-    if (searchTerm == null) return null;
+    if (!searchTerm) return null;
+    let location = searchParams.get("location");
+    if (location) {
+        searchTerm += `&location=${location}`
+    }
     return getSearch(searchTerm);
 }
 

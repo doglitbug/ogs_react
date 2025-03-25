@@ -1,7 +1,11 @@
-export type UserPreview = {
+export type userProfile = {
     username: string;
+    name: string | null;
     email: string;
     user_id: number;
+    location_id: number | null;
+    location: string | null;
+    role: string;
 };
 
 export type garagePreview = {
