@@ -20,7 +20,7 @@ export default function Navigation() {
     }
 
     return (
-        <Navbar expand="lg" sticky="top">
+        <Navbar expand="lg" sticky="top" id="navigation">
             <Navbar.Brand href="/">Online Garage Sale</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
@@ -28,7 +28,7 @@ export default function Navigation() {
                     <Nav.Link key={"garages"} href="/garage">Garages</Nav.Link>
                     <Nav.Link key={"items"} href="/item">Items</Nav.Link>
                 </Nav>
-                <Nav className="justify-content-end">
+                <Nav className="justify-content-center">
                     <Form className="d-flex" onSubmit={handleSubmit}>
                         <Form.Control
                             type="search"
@@ -49,7 +49,8 @@ export default function Navigation() {
 
 function profileLinks() {
     return (
-        <NavDropdown title="Signed in as Arron Dick" id="user-dropdown">
+        <NavDropdown title="Account" id="user-dropdown">
+            <Navbar.Text>Arron Dick</Navbar.Text>
             <Nav.Link href="/profile">Profile</Nav.Link>
             <NavDropdown.Divider/>
             <NavDropdown.Item href="/logout">

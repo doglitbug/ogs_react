@@ -8,7 +8,8 @@ body {
 
 nav.navbar {
     background-color: cornflowerblue;
-    padding-left: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 a.btn-social {
