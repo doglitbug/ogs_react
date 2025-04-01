@@ -73,7 +73,7 @@ export default function App() {
         <>
             <UserProvider>
                 <Navigation/>
-                <div className="container">
+                <div className="container mainpage">
                     <Outlet/>
                 </div>
                 <Footer/>
