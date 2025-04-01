@@ -1,4 +1,4 @@
-const apiUrl = process.env.API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 /**
  * Headers to apply to all API call after logging in
  * @returns Headers with bearer token

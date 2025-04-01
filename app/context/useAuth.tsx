@@ -2,7 +2,6 @@ import React, {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import type {userProfile} from "~/models/all";
 import {jwtDecode} from "jwt-decode";
-import type {JwtPayload} from "jwt-decode";
 
 type UserContextType = {
     token: string | null;
@@ -20,6 +19,7 @@ type Props = { children: React.ReactNode };
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
 export const UserProvider = ({children}: Props) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
     const [token, setToken] = useState<string | null>(null);
     const [user, setUser] = useState<userProfile | null>(null);
@@ -44,7 +44,7 @@ export const UserProvider = ({children}: Props) => {
         username: string,
         password: string
     ) => {
-        fetch('http://doglitbug.com:82/api/v1/login', {
+        fetch(apiUrl + 'login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -86,7 +86,6 @@ export const UserProvider = ({children}: Props) => {
     const getUserDetails = () => {
         return user;
     }
-
 
 
     return (
