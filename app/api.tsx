@@ -1,4 +1,4 @@
-const baseURL = 'http://doglitbug.com:82/api/v1/'
+const apiUrl = process.env.API_URL;
 /**
  * Headers to apply to all API call after logging in
  * @returns Headers with bearer token
@@ -12,7 +12,7 @@ const headers = () => {
 }
 
 async function doGetCall(api: string) {
-    const response = await fetch(baseURL + api, {
+    const response = await fetch(apiUrl + api, {
         headers: headers(),
     })
 
