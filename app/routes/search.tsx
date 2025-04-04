@@ -23,7 +23,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Search({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
-        return showSearchResults(loaderData.data.search.items);
+        return showSearchResults(loaderData.data.search.results);
     } else {
         return (
             <>

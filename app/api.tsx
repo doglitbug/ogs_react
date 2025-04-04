@@ -6,7 +6,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const headers = () => {
     const myHeaders = new Headers()
     myHeaders.append("Content-Type", "application/json")
-    const token = localStorage.getItem('jwt-token')
+    const token = localStorage.getItem('token')
     if (token) myHeaders.append("Authorization", `Bearer ${token}`)
     return myHeaders
 }
@@ -36,6 +36,12 @@ async function doPostCall(api: string, body: any) {
 //#region Auth
 export const doLoginUser = async (body: any) => {
     return doPostCall("login", body);
+}
+//#endregion
+
+//#region user
+export const getUser = async (id: string = "") => {
+    return doGetCall("user/" + id);
 }
 //#endregion
 

@@ -12,7 +12,6 @@ export default [
     route("search", "routes/search.tsx"),
 
     layout("routes/ProtectedRoute.tsx", [
-        route("user", "routes/user.tsx"),
         route("profile", "routes/profile.tsx"),
         route("logout", "routes/logout.tsx"),
     ]),
