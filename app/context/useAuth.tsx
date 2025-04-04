@@ -2,6 +2,7 @@ import React, {createContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import type {userProfile} from "~/models/all";
 import {jwtDecode} from "jwt-decode";
+import {doLoginUser} from "~/api";
 
 type UserContextType = {
     token: string | null;
@@ -44,28 +45,17 @@ export const UserProvider = ({children}: Props) => {
         username: string,
         password: string
     ) => {
-        fetch(apiUrl + 'login', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify({username, password}),
-        })
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                if (data.message === 'success') {
-                    localStorage.setItem('token', data.token)
-                    setToken(data.token)
-                    const user = jwtDecode<userProfile>(data.token);
-                    localStorage.setItem('user', JSON.stringify(user));
-                    setUser(user);
-                    navigate('/profile')
-                } else {
-                    alert(data.message)
-                }
-            })
+        let result: any = await doLoginUser({username, password});
+        if (result.status == 200) {
+            localStorage.setItem('token', result.data.token)
+            setToken(result.data.token)
+            const user = jwtDecode<userProfile>(result.data.token);
+            localStorage.setItem('user', JSON.stringify(user));
+            setUser(user);
+            navigate('/profile')
+        } else {
+            window.alert(result.data.error);
+        }
     }
 
     const logoutUser = () => {

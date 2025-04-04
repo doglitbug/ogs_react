@@ -21,6 +21,24 @@ async function doGetCall(api: string) {
     return {status: statusCode, data: data}
 }
 
+async function doPostCall(api: string, body: any) {
+    const response = await fetch(apiUrl + api, {
+        method: 'POST',
+        headers: headers(),
+        body: JSON.stringify(body),
+    })
+
+    const statusCode = response.status;
+    const data = await response.json();
+    return {status: statusCode, data: data}
+}
+
+//#region Auth
+export const doLoginUser = async (body: any) => {
+    return doPostCall("login", body);
+}
+//#endregion
+
 //#region Garages
 /**
  * Get data for a Garage
@@ -58,7 +76,6 @@ export const getItems = async () => {
 //#endregion
 
 //#region Search
-
 /**
  * Get data for all Items
  * @returns
