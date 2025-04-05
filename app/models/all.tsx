@@ -1,11 +1,12 @@
 export type userProfile = {
     username: string;
-    name: string | null;
+    name: string;
     email: string;
     user_id: number;
-    location_id: number | null;
-    location: string | null;
+    location_id: number;
+    location: string;
     role: string;
+    description: string;
 };
 
 export type garagePreview = {

@@ -34,7 +34,7 @@ function showGarages(garages: garagePreview[]) {
             <div className="row">
                 {garages.map(function (garage: garagePreview) {
                     return (
-                        <div className="col-lg-3 col-md-6" key={garage.garage_id}>
+                        <div className="col-xl-4 col-md-6" key={garage.garage_id}>
                             <ShowGaragePreview garage={garage}/>
                         </div>
                     )

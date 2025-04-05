@@ -13,6 +13,7 @@ export default [
 
     layout("routes/ProtectedRoute.tsx", [
         route("profile", "routes/profile.tsx"),
+        route("profile/edit", "routes/profile-edit.tsx"),
         route("logout", "routes/logout.tsx"),
     ]),
     route("login", "routes/login.tsx"),

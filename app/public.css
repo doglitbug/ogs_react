@@ -69,4 +69,13 @@ i.bi {
 
 .garagePreview, .searchResult {
     min-height: 250px;
+
+}
+
+.rounded {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: grey 5px 5px;
 }

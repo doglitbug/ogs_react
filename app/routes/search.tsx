@@ -41,7 +41,7 @@ function showSearchResults(results: any) {
             <div className="row">
                 {results.map(function (result: searchResult) {
                     return (
-                        <div className="col-lg-3 col-md-6" key={result.item_id}>
+                        <div className="col-xl-4 col-md-6" key={result.item_id}>
                             <ShowSearchResult searchResult={result}/>
                         </div>
                     )

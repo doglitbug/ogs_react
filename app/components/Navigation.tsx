@@ -11,7 +11,10 @@ export default function Navigation() {
 
     return (
         <Navbar expand="lg" sticky="top" id="navigation">
-            <Navbar.Brand href="/">Online Garage Sale</Navbar.Brand>
+            <Navbar.Brand href="/">
+                <span className="d-lg-inline-block d-none">Online Garage Sale</span>
+                <span className="d-inline-block d-lg-none">OGS</span>
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -31,7 +34,7 @@ function profileLinks(getUserDetails: userProfile | null) {
     return (
         <NavDropdown title="Logged in" id="user-dropdown" align="end">
             <NavDropdown.Header>{getUserDetails?.name}</NavDropdown.Header>
-            <NavDropdown.Item href="/profile">Edit Profile</NavDropdown.Item>
+            <NavDropdown.Item href="/profile">Show Profile</NavDropdown.Item>
             <NavDropdown.Divider/>
             <NavDropdown.Item href="/logout">
                 Log out
