@@ -23,9 +23,8 @@ export default function Login() {
 
     return (
         <>
-            <h1>Login</h1>
-            <br />
-            <Form className="row g-3" onSubmit={handleSubmit}>
+            <h1>Login:</h1>
+            <Form className="row g-2 rounded" onSubmit={handleSubmit}>
                 <Form.Group className="col-md-6" controlId="formBasicEmail">
                     <Form.Label>Username</Form.Label>
                     <Form.Control

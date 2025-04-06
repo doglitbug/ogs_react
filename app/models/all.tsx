@@ -45,3 +45,9 @@ export type searchResult = {
     garage_id: number;
     location: string;
 }
+
+export type callToAction = {
+    text: string;
+    variant: string;
+    link: string;
+}

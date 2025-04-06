@@ -31,8 +31,8 @@ function EditProfile(user: userProfile) {
     return (
         <>
             <h1>Edit user:</h1>
-            <Form className="row g-2">
-                <Form.Group className="col-md-6">asd
+            <Form className="row g-2 rounded">
+                <Form.Group className="col-md-6">
                     <Form.Label>Full name:</Form.Label>
                     <Form.Control type="text" defaultValue={user.name}/>
                     <Form.Text className="text-muted">This will only be shown to other logged in users</Form.Text>
