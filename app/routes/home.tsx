@@ -1,4 +1,5 @@
 import type { Route } from "./+types/home";
+import CallToAction from "~/components/CallToAction";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -10,6 +11,7 @@ export function meta({ }: Route.MetaArgs) {
 export default function Home() {
   return <>
     <h1>Online Garage Sale</h1>
+    <CallToAction actions={[]}/>
     <p>Welcome to the Online Garage Sale, an idea born of necessity and disappointment!</p>
 
     <p>Necessity and disappointment?</p>

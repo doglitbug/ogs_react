@@ -9,17 +9,16 @@ interface callToActionProps {
 
 export default function CallToAction(props: callToActionProps) {
     const {actions} = props;
+    if (actions.length == 0) return (<></>);
     return (
         <div className="cta">
             {actions.map((action) => {
                 return (
-                    <>
-                        <Link to={action.link}>
-                            <Button variant={action.variant}>
-                                {action.text}
-                            </Button>
-                        </Link>
-                    </>
+                    <Link to={action.link} key={action.link + action.text}>
+                        <Button variant={action.variant}>
+                            {action.text}
+                        </Button>
+                    </Link>
                 )
             })}
         </div>

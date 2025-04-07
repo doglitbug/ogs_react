@@ -18,12 +18,16 @@ export default function Navigation() {
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link key={"garages"} href="/garage">Garages</Nav.Link>
+                    <Nav.Link key="garages" href="/garage">Garages</Nav.Link>
                 </Nav>
                 <Nav className="justify-content-center">
-                <NavbarSearch/>
+                    <NavbarSearch/>
                     {isLoggedIn() ? profileLinks(getUserDetails()) :
-                        <Nav.Link key="login" href="/login">Log in</Nav.Link>}
+                        <>
+                            <Nav.Link key="register" href="/register">Register</Nav.Link>
+                            <Nav.Link key="login" href="/login">Log in</Nav.Link>
+                        </>
+                    }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

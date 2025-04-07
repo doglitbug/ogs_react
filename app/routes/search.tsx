@@ -48,7 +48,6 @@ export default function Search({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
         const results = loaderData.data.search.results;
 
-
         return (
             <>
                 <h1>Search results:</h1>
@@ -79,7 +78,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
                                 </InputGroup>
                             </div>
 
-                            <div className="col-sm-12 col-lg-3">
+                            <div className="col-sm-12 col-lg-4">
                                 <InputGroup>
                                     <InputGroup.Text>in</InputGroup.Text>
                                     <Form.Control
@@ -92,7 +91,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
 
                                 </InputGroup>
                             </div>
-                            <div className="col-sm-2 col-lg-2">
+                            <div className="col-sm-2 col-lg-1">
                                 <Button type="submit">Search</Button>
                             </div>
                         </div>

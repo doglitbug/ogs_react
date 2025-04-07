@@ -3,6 +3,8 @@ import {getUser} from "~/api";
 import type {userProfile} from "~/models/all";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import type {callToAction} from "~/models/all";
+import CallToAction from "~/components/CallToAction";
 
 export async function clientLoader({params}: Route.LoaderArgs) {
     return getUser();
@@ -10,7 +12,7 @@ export async function clientLoader({params}: Route.LoaderArgs) {
 
 export function meta({}: Route.MetaArgs) {
     return [
-        {title: "Online Garage Sale"},
+        {title: "Online Garage Sale: Edit Profile"},
         {name: "description", content: "Welcome to the Online Garage Sale!"},
     ];
 }
@@ -28,10 +30,25 @@ export default function Profile({loaderData}: Route.ComponentProps) {
 }
 
 function EditProfile(user: userProfile) {
+    const actions: callToAction[] = [
+        {
+            text: "Back",
+            variant: "primary",
+            link: "/profile"
+        },
+        {
+            text: "Delete",
+            variant: "danger",
+            link: "/profile/delete"
+        },
+    ];
+
     return (
         <>
             <h1>Edit user:</h1>
-            <Form className="row g-2 rounded">
+            <CallToAction actions={actions}/>
+            <div className="rounded">
+            <Form className="row g-2">
                 <Form.Group className="col-md-6">
                     <Form.Label>Full name:</Form.Label>
                     <Form.Control type="text" defaultValue={user.name}/>
@@ -68,6 +85,7 @@ function EditProfile(user: userProfile) {
                     </Button>
                 </Form.Group>
             </Form>
+            </div>
         </>
     )
 }

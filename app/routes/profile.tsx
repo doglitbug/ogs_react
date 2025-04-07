@@ -2,9 +2,6 @@ import type {Route} from "./+types/profile";
 import {getUser} from "~/api";
 import type {callToAction, userProfile} from "~/models/all";
 import CallToAction from "~/components/CallToAction";
-import Button from "react-bootstrap/Button";
-import {Link} from "react-router";
-
 
 export async function clientLoader({params}: Route.LoaderArgs) {
     return getUser();
@@ -50,12 +47,27 @@ function ShowProfile(user: userProfile) {
         <>
             <h1>Profile:</h1>
             <CallToAction actions={actions}/>
-            <ul>
-                <li>{user.username}</li>
-                <li>{user.name}</li>
-                <li>{user.email}</li>
-                <li>{user.location}</li>
-            </ul>
+            <div className="rounded">
+                <dl>
+                    <dt>Username</dt>
+                    <dd>{user.username}</dd>
+
+                    <dt>Full name</dt>
+                    <dd>{user.name}</dd>
+
+                    <dt>Email address</dt>
+                    <dd>{user.email}</dd>
+
+                    <dt>Location</dt>
+                    <dd>{user.location}</dd>
+
+                    <dt>User type</dt>
+                    <dd>{user.role}</dd>
+
+                    <dt>About me</dt>
+                    <dd>{user.description}</dd>
+                </dl>
+            </div>
         </>
     )
 }
