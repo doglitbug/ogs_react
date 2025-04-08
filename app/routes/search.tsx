@@ -25,26 +25,23 @@ export default function Search({loaderData}: Route.ComponentProps) {
     const {getUserDetails} = useAuth();
 
     const [searchParams, setSearchParams] = useSearchParams();
-
-    const [q, setQ] = useState(searchParams.get('q') ?? '');
-    const [location, setLocation] = useState(searchParams.get('location') ?? getUserDetails()?.location);
+    const [parameters, setParameters] = useState({q: '', method: '', location: ''})
 
     //Updates on page form when searching from navbar on same page
     useEffect(() => {
-        setQ(searchParams.get('q') ?? '')
-    }, [searchParams.get('q')])
+        setParameters({
+            q: searchParams.get('q') ?? '',
+            method: searchParams.get('method') ?? 'buy',
+            location: searchParams.get('location') ?? getUserDetails()?.location ?? ''
+        })
+    }, [searchParams])
 
     const results = loaderData?.search?.results;
     const error = loaderData?.error;
 
     function handleSubmit(event: any) {
         event.preventDefault()
-        const searchData = {
-            q: event.target.search.value,
-            method: event.target.method.value,
-            location: event.target.location.value
-        }
-        setSearchParams(searchData)
+        setSearchParams(parameters)
     }
 
     return (
@@ -57,6 +54,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
                             <InputGroup.Text>I want to</InputGroup.Text>
                             <Form.Select id="method"
                                          aria-label="Buying or Selling"
+                                         onChange={(e) => setParameters({...parameters, method: e.target.value})}
                             >
                                 <option value="buy">buy</option>
                                 <option value="sell">sell</option>
@@ -70,8 +68,8 @@ export default function Search({loaderData}: Route.ComponentProps) {
                             <Form.Control
                                 id="search"
                                 type="search"
-                                value={q}
-                                onChange={(e) => setQ(e.target.value)}
+                                value={parameters.q}
+                                onChange={(e) => setParameters({...parameters, q: e.target.value})}
                                 placeholder="Search"
                                 aria-label="Search"
                             />
@@ -84,8 +82,8 @@ export default function Search({loaderData}: Route.ComponentProps) {
                             <Form.Control
                                 id="location"
                                 type="search"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
+                                value={parameters.location}
+                                onChange={(e) => setParameters({...parameters, location: e.target.value})}
                                 placeholder="Location"
                                 aria-label="Location"
                             />
@@ -94,7 +92,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
                     </div>
 
                     <div className="col-sm-2 col-lg-1">
-                            <Button type="submit">Find</Button>
+                        <Button type="submit">Find</Button>
                     </div>
                 </div>
             </Form>
