@@ -53,6 +53,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
                         <InputGroup>
                             <InputGroup.Text>I want to</InputGroup.Text>
                             <Form.Select id="method"
+                                         value={parameters.method}
                                          aria-label="Buying or Selling"
                                          onChange={(e) => setParameters({...parameters, method: e.target.value})}
                             >
