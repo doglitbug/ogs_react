@@ -15,7 +15,7 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function Show({ loaderData }: Route.ComponentProps) {
     if (loaderData != null && loaderData.status==200) {
-        return ShowGarage(loaderData.data.garage);
+        return ShowGarage(loaderData.garage);
     } else {
         return (
             <>

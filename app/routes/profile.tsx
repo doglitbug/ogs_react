@@ -16,7 +16,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Profile({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
-        return ShowProfile(loaderData.data.user);
+        return ShowProfile(loaderData.user);
     } else {
         return (
             <h1>Loading</h1>

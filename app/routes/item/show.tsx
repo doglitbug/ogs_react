@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Show({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
-        return showItem(loaderData.data.item);
+        return showItem(loaderData.item);
     } else {
         return (
             <>

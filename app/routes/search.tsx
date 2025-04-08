@@ -27,7 +27,6 @@ export function meta({}: Route.MetaArgs) {
     ];
 }
 
-
 export default function Search({loaderData}: Route.ComponentProps) {
     const navigate = useNavigate();
     const {getUserDetails} = useAuth();
@@ -45,58 +44,60 @@ export default function Search({loaderData}: Route.ComponentProps) {
         navigate(url);
     }
 
-    if (loaderData != null && loaderData.status == 200) {
-        const results = loaderData.data.search.results;
+    let results;
+    if (loaderData != null) {
+        results = loaderData.search?.results;
+    }
+    return (
+        <>
+            <h1>Search results:</h1>
+            <Form onSubmit={handleSubmit} className="rounded">
+                <div className="row">
+                    <div className="col-sm-12 col-lg-4">
+                        <InputGroup>
+                            <InputGroup.Text>I want to</InputGroup.Text>
+                            <Form.Select
+                                aria-label="Buying or Selling"
+                            >
+                                <option value="buy">buy</option>
+                                <option value="sell">sell</option>
+                                <option value="either">buy or sell</option>
+                            </Form.Select>
+                        </InputGroup>
+                    </div>
 
-        return (
-            <>
-                <h1>Search results:</h1>
-                <Form onSubmit={handleSubmit} className="rounded">
-                        <div className="row">
-                            <div className="col-sm-12 col-lg-4">
-                                <InputGroup>
-                                    <InputGroup.Text>I want to</InputGroup.Text>
-                                    <Form.Select
-                                        aria-label="Buying or Selling"
-                                    >
-                                        <option value="buy">buy</option>
-                                        <option value="sell">sell</option>
-                                        <option value="either">buy or sell</option>
-                                    </Form.Select>
-                                </InputGroup>
-                            </div>
+                    <div className="col-sm-12 col-lg-3">
+                        <InputGroup>
+                            <Form.Control
+                                type="search"
+                                defaultValue={q}
+                                onChange={(e) => setQ(e.target.value)}
+                                placeholder="Search"
+                                aria-label="Search"
+                            />
+                        </InputGroup>
+                    </div>
 
-                            <div className="col-sm-12 col-lg-3">
-                                <InputGroup>
-                                    <Form.Control
-                                        type="search"
-                                        defaultValue={q}
-                                        onChange={(e) => setQ(e.target.value)}
-                                        placeholder="Search"
-                                        aria-label="Search"
-                                    />
-                                </InputGroup>
-                            </div>
+                    <div className="col-sm-12 col-lg-4">
+                        <InputGroup>
+                            <InputGroup.Text>in</InputGroup.Text>
+                            <Form.Control
+                                type="search"
+                                value={location ? location : ""}
+                                onChange={(e) => setLocation(e.target.value)}
+                                placeholder="Location"
+                                aria-label="Location"
+                            />
 
-                            <div className="col-sm-12 col-lg-4">
-                                <InputGroup>
-                                    <InputGroup.Text>in</InputGroup.Text>
-                                    <Form.Control
-                                        type="search"
-                                        value={location ? location : ""}
-                                        onChange={(e) => setLocation(e.target.value)}
-                                        placeholder="Location"
-                                        aria-label="Location"
-                                    />
+                        </InputGroup>
+                    </div>
+                    <div className="col-sm-2 col-lg-1">
+                        <Button type="submit">Search</Button>
+                    </div>
+                </div>
+            </Form>
 
-                                </InputGroup>
-                            </div>
-                            <div className="col-sm-2 col-lg-1">
-                                <Button type="submit">Search</Button>
-                            </div>
-                        </div>
-                </Form>
-
+            {results && (
                 <div className="row">
                     {results.map(function (result: searchResult) {
                         return (
@@ -105,15 +106,11 @@ export default function Search({loaderData}: Route.ComponentProps) {
                             </div>
                         )
                     })}
-                </div>
-            </>
-        )
-    } else {
-        return (
-            <>
-                <h1>Search</h1>
-                <p>No results found</p>
-            </>
-        )
-    }
+                </div>)}
+
+            {loaderData.error && (<div className={"error"}>
+                {loaderData.error}
+            </div>)}
+        </>
+    )
 }

@@ -19,7 +19,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Profile({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
-        return EditProfile(loaderData.data.user);
+        return EditProfile(loaderData.user, loaderData.errors);
     } else {
         return (
             <>
@@ -29,7 +29,7 @@ export default function Profile({loaderData}: Route.ComponentProps) {
     }
 }
 
-function EditProfile(user: userProfile) {
+function EditProfile(user: userProfile, errors: string[]) {
     const actions: callToAction[] = [
         {
             text: "Back",

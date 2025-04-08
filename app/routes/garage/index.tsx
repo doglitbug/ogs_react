@@ -16,7 +16,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Index({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
-        return showGarages(loaderData.data.garages.results);
+        return showGarages(loaderData.garages.results);
     } else {
         return (
             <>

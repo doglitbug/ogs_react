@@ -1,24 +1,33 @@
-import type { Route } from "./+types/login";
-import { useState } from 'react'
+import type {Route} from "./+types/login";
+import {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useAuth } from "~/context/useAuth"
+import {useAuth} from "~/context/useAuth"
+import {useNavigate} from "react-router";
 
-export function meta({ }: Route.MetaArgs) {
+export function meta({}: Route.MetaArgs) {
     return [
-        { title: "Online Garage Sale" },
-        { name: "description", content: "Welcome to the Online Garage Sale!" },
+        {title: "Online Garage Sale"},
+        {name: "description", content: "Welcome to the Online Garage Sale!"},
     ];
 }
 
 export default function Login() {
-    const [username, setUsername] = useState('doglitbug')
-    const [password, setPassword] = useState('1')
-    const { loginUser } = useAuth()
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState('')
+    const {loginUser} = useAuth()
+    const navigate = useNavigate();
 
-    function handleSubmit(event: { preventDefault: () => void }) {
+    async function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault()
-        loginUser(username, password)
+        const result: any = await loginUser(username, password);
+        if (result.status == 200) {
+            navigate("/profile");
+        } else {
+            console.log(result);
+            setErrors(result.error);
+        }
     }
 
     return (
@@ -32,7 +41,7 @@ export default function Login() {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter username"
-                        required />
+                        required/>
                 </Form.Group>
 
                 <Form.Group className="col-md-6" controlId="formBasicPassword">
@@ -42,7 +51,10 @@ export default function Login() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
-                        required />
+                        required/>
+                    <div className="error">
+                        {errors}
+                    </div>
                 </Form.Group>
 
                 <Form.Group className="col-md-12">

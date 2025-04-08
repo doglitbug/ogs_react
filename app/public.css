@@ -90,3 +90,7 @@ i.bi {
 button {
     margin-right: 8px;
 }
+
+.error {
+    color: red;
+}

@@ -16,9 +16,9 @@ async function doGetCall(api: string) {
         headers: headers(),
     })
 
-    const statusCode = response.status;
+    const statusCode = await response.status;
     const data = await response.json();
-    return {status: statusCode, data: data}
+    return {status: statusCode, ...data}
 }
 
 async function doPostCall(api: string, body: any) {
@@ -28,9 +28,9 @@ async function doPostCall(api: string, body: any) {
         body: JSON.stringify(body),
     })
 
-    const statusCode = response.status;
+    const statusCode = await response.status;
     const data = await response.json();
-    return {status: statusCode, data: data}
+    return {status: statusCode, ...data}
 }
 
 //#region Auth
