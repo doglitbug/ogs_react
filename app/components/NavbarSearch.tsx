@@ -1,12 +1,18 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import {useState} from "react";
-import {useNavigate} from "react-router";
+import {useEffect, useState} from "react";
+import {useNavigate, useSearchParams} from "react-router";
 import {InputGroup} from "react-bootstrap";
 
 export function NavbarSearch() {
     const navigate = useNavigate();
-    const [q, setQ] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [q, setQ] = useState(searchParams.get('q') ?? '');
+
+    useEffect(() => {
+        setQ(searchParams.get('q') ?? '')
+    }, [searchParams.get('q')])
 
     function handleSubmit(event: { preventDefault: () => void }) {
         event.preventDefault()

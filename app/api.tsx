@@ -16,7 +16,7 @@ async function doGetCall(api: string) {
         headers: headers(),
     })
 
-    const statusCode = await response.status;
+    const statusCode = response.status;
     const data = await response.json();
     return {status: statusCode, ...data}
 }
@@ -28,7 +28,7 @@ async function doPostCall(api: string, body: any) {
         body: JSON.stringify(body),
     })
 
-    const statusCode = await response.status;
+    const statusCode = response.status;
     const data = await response.json();
     return {status: statusCode, ...data}
 }
