@@ -6,7 +6,7 @@ import { useAuth } from "~/context/useAuth"
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Online Garage Sale" },
+        { title: "Online Garage Sale: Register" },
         { name: "description", content: "Welcome to the Online Garage Sale!" },
     ];
 }

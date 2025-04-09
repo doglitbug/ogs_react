@@ -7,7 +7,7 @@ import {useNavigate} from "react-router";
 
 export function meta({}: Route.MetaArgs) {
     return [
-        {title: "Online Garage Sale"},
+        {title: "Online Garage Sale: Login"},
         {name: "description", content: "Welcome to the Online Garage Sale!"},
     ];
 }

@@ -9,7 +9,7 @@ export async function clientLoader({params}: Route.LoaderArgs) {
 
 export function meta({}: Route.MetaArgs) {
     return [
-        {title: "Online Garage Sale"},
+        {title: "Online Garage Sale: Profile"},
         {name: "description", content: "Welcome to the Online Garage Sale!"},
     ];
 }

@@ -16,7 +16,7 @@ export async function clientLoader({params, request}: Route.LoaderArgs) {
 
 export function meta({}: Route.MetaArgs) {
     return [
-        {title: "Online item Sale"},
+        {title: "Online Garage Sale: Search"},
         {name: "description", content: "Welcome to the Online item Sale!"},
     ];
 }
