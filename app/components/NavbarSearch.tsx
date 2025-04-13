@@ -1,8 +1,6 @@
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import {useEffect, useState} from "react";
 import {useNavigate, useSearchParams} from "react-router";
-import {InputGroup} from "react-bootstrap";
+import {Form, Button, InputGroup} from "react-bootstrap";
 
 export function NavbarSearch() {
     const navigate = useNavigate();
