@@ -1,9 +1,7 @@
 import type {Route} from "./+types/login";
 import {useState} from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import {useAuth} from "~/context/useAuth"
-import {useNavigate} from "react-router";
+import {Form, useNavigate} from "react-router";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -34,34 +32,39 @@ export default function Login() {
         <>
             <h1>Login:</h1>
             <Form className="row g-2 rounded" onSubmit={handleSubmit}>
-                <Form.Group className="col-md-6" controlId="formBasicEmail">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder="Enter username"
-                        required/>
-                </Form.Group>
+                <div className="col-md-6">
+                    <label htmlFor="username" className="form-label">Username</label>
+                    <input type="text"
+                           className="form-control"
+                           placeholder="Enter username"
+                           aria-label="Username"
+                           name="username"
+                           value={username}
+                           onChange={(e) => setUsername(e.target.value)}
+                           required/>
+                </div>
 
-                <Form.Group className="col-md-6" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        required/>
+                <div className="col-md-6">
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <input type="password"
+                           className="form-control"
+                           placeholder="Enter password"
+                           aria-label="password"
+                           name="password"
+                           value={password}
+                           onChange={(e) => setPassword(e.target.value)}
+                           required
+                    />
+                </div>
+
+                <div className="col-md-12">
                     <div className="error">
                         {errors}
                     </div>
-                </Form.Group>
-
-                <Form.Group className="col-md-12">
-                    <Button variant="primary" type="submit">
+                    <button type="submit" className="btn btn-primary">
                         Login
-                    </Button>
-                </Form.Group>
+                    </button>
+                </div>
             </Form>
         </>
     )
