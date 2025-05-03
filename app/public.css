@@ -95,3 +95,8 @@ button {
 .error {
     color: red;
 }
+
+.error:before {
+    content: "\a ";
+    white-space: pre;
+}

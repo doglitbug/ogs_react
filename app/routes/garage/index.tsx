@@ -3,7 +3,7 @@ import {getGarages} from "~/api";
 import ShowGaragePreview from "~/components/Garage";
 import type {garagePreview} from "~/models/all";
 
-export async function clientLoader({params}: Route.LoaderArgs) {
+export async function clientLoader() {
     return getGarages();
 }
 

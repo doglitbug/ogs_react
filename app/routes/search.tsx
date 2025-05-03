@@ -9,8 +9,10 @@ import {useAuth} from "~/context/useAuth";
 import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router";
 
-export async function clientLoader({params, request}: Route.LoaderArgs) {
+export async function clientLoader({request}: Route.LoaderArgs) {
     const searchParams = new URL(request.url).searchParams;
+    console.log(searchParams.toString());
+
     return getSearch(searchParams.toString());
 }
 
@@ -98,6 +100,10 @@ export default function Search({loaderData}: Route.ComponentProps) {
                 </div>
             </Form>
 
+            {error && (<div className={"error"}>
+                {error}
+            </div>)}
+
             {results && (
                 <div className="row">
                     {results.map(function (result: searchResult) {
@@ -108,10 +114,6 @@ export default function Search({loaderData}: Route.ComponentProps) {
                         )
                     })}
                 </div>)}
-
-            {error && (<div className={"error"}>
-                {error}
-            </div>)}
         </>
     )
 }

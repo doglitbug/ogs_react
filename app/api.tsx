@@ -33,6 +33,18 @@ async function doPostCall(api: string, body: any) {
     return {status: statusCode, ...data}
 }
 
+async function doPutCall(api: string, body: any) {
+    const response = await fetch(apiUrl + api, {
+        method: 'PUT',
+        headers: headers(),
+        body: JSON.stringify(body),
+    })
+
+    const statusCode = response.status;
+    const data = await response.json();
+    return {status: statusCode, ...data}
+}
+
 //#region Auth
 export const doLoginUser = async (body: any) => {
     return doPostCall("login", body);
@@ -40,8 +52,16 @@ export const doLoginUser = async (body: any) => {
 //#endregion
 
 //#region user
+/**
+ * Get data for a user
+ * @param id user id, will default to self if not specified
+ */
 export const getUser = async (id: string = "") => {
     return doGetCall("user/" + id);
+}
+
+export const updateUser = async (id: string = "", body: any) => {
+    return doPutCall("user/" + id, body);
 }
 //#endregion
 
@@ -83,10 +103,10 @@ export const getItems = async () => {
 
 //#region Search
 /**
- * Get data for all Items
+ * Perform a search
  * @returns
  */
 export const getSearch = async (search: string) => {
-    return doGetCall("search?search=" + search);
+    return doGetCall("search?" + search);
 }
 //#endregion
