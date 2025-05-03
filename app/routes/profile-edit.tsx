@@ -1,12 +1,8 @@
 import type {Route} from "./+types/profile";
 import {getUser, updateUser} from "~/api";
-import type {userProfile} from "~/models/all";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import type {callToAction} from "~/models/all";
 import CallToAction from "~/components/CallToAction";
-import {useState} from "react";
-import {useNavigate} from "react-router";
+import {Form, useActionData, useLoaderData, useNavigate} from "react-router";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -15,30 +11,26 @@ export function meta({}: Route.MetaArgs) {
     ];
 }
 
-export async function clientLoader({params}: Route.ClientLoaderArgs) {
-    return getUser();
+export async function clientLoader() {
+    return await getUser();
 }
 
-export default function Profile({loaderData}: Route.ComponentProps) {
-    if (loaderData != null && loaderData.status == 200) {
-        return EditProfile(loaderData.user);
-    } else {
-        return (
-            <>
-                <h1>Edit user</h1>
-            </>
-        )
-    }
+export async function clientAction({request}: Route.ClientActionArgs) {
+    let formData = await request.formData();
+    const obj = Object.fromEntries(formData.entries())
+    return await updateUser("", obj);
 }
 
-function EditProfile(user: userProfile) {
-    const [errors, setErrors] = useState({
-        name: '',
-        username: '',
-        location: '',
-        description: ''
-    })
+export default function EditProfile() {
     const navigate = useNavigate();
+    const {user} = useLoaderData();
+    const actionResults = useActionData();
+    const errors = actionResults?.error;
+
+    //Cannot do this in clientAction
+    if (actionResults?.status == 200) {
+        navigate('/profile')
+    }
 
     const actions: callToAction[] = [
         {
@@ -51,67 +43,61 @@ function EditProfile(user: userProfile) {
             variant: "danger",
             link: "/profile/delete"
         },
-    ];
+    ]
 
-    async function handleSubmit(event: any) {
-        event.preventDefault()
-
-        const obj = Object.fromEntries(new FormData(event.target).entries())
-
-        const result: any = await updateUser("", obj);
-        if (result.status == 200) {
-            navigate("/profile");
-        } else {
-            setErrors(result.error);
-        }
-    }
-
-    // @ts-ignore All the error?.xxx
     return (
         <>
             <h1>Edit user:</h1>
             <CallToAction actions={actions}/>
             <div className="rounded">
-                <Form onSubmit={handleSubmit} className="row g-2">
-                    <Form.Group className="col-md-6">
-                        <Form.Label>Full name:</Form.Label>
-                        <Form.Control type="text" name="name" defaultValue={user.name}/>
-                        <Form.Text className="text-muted">This will only be shown to other logged in users</Form.Text>
-                        <Form.Text className="error">{errors.name}</Form.Text>
-                    </Form.Group>
-                    <Form.Group className="col-md-6">
-                        <Form.Label>Username:</Form.Label>
-                        <Form.Control type="text" name="username" defaultValue={user.username}/>
-                        <Form.Text className="text-muted">Shown to all users</Form.Text>
-                        <Form.Text className="error">{errors.username}</Form.Text>
-                    </Form.Group>
-                    <Form.Group className="col-md-6">
-                        <Form.Label>Email:</Form.Label>
-                        <Form.Control type="email" defaultValue={user.email} disabled/>
-                        <Form.Text className="text-muted">This will only be shown to other logged in users and cannot be
-                            changed</Form.Text>
-                    </Form.Group>
-                    <Form.Group className="col-md-6">
-                        <Form.Label>Location:</Form.Label>
-                        <Form.Select name="location_id">
+                <Form method="post" className="row g-3">
+                    <div className="col-md-6">
+                        <label htmlFor="email" className="form-label">Email (cannot be changed)</label>
+                        <input type="text" className="form-control" placeholder="email" aria-label="Email"
+                               name="email"
+                               disabled
+                               value={user.email}/>
+                    </div>
+
+                    <div className="col-md-6">
+                        <label htmlFor="name" className="form-label">Real Name</label>
+                        <input type="text" className="form-control" placeholder="Real Name" aria-label="Real Name"
+                               name="name"
+                               defaultValue={user.name}/>
+                        <small className="error">{errors?.name}</small>
+                    </div>
+
+                    <div className="col-md-6">
+                        <label htmlFor="username" className="form-label">Username (shown to others)</label>
+                        <input type="text" className="form-control" placeholder="Username" aria-label="Username"
+                               name="username"
+                               defaultValue={user.username}/>
+                        <small className="error">{errors?.username}</small>
+                    </div>
+
+                    <div className="col-md-6">
+                        <label htmlFor="location_id" className="form-label">Location (used for default Garage/Search
+                            location)</label>
+                        <select className="form-select" name="location_id" aria-label="Location">
                             <option value="1">Dunedin</option>
-                            <option value="1">Dunedin</option>
-                        </Form.Select>
-                        <Form.Text className="error">{errors.location}</Form.Text>
-                    </Form.Group>
-                    <Form.Group className="col-md-12">
-                        <Form.Label>Description (about yourself):</Form.Label>
-                        <Form.Control as="textarea" name="description" defaultValue={user.description} rows={4}/>
-                        <Form.Text className="error">{errors.description}</Form.Text>
-                    </Form.Group>
-                    <Form.Group>
-                        <Button variant="warning" type="reset">
-                            Cancel
-                        </Button>
-                        <Button variant="success" type="submit">
-                            Save
-                        </Button>
-                    </Form.Group>
+                        </select>
+                        <small className="error">{errors?.location_id}</small>
+                    </div>
+
+                    <div className="col-12">
+                        <label htmlFor="description" className="form-label">Description (about yourself)</label>
+                        <textarea className="form-control" placeholder="About me" aria-label="Description"
+                                  name="description"
+                                  rows={5}
+                                  defaultValue={user.description}>
+                        </textarea>
+                        <small className="error">{errors?.description}</small>
+                    </div>
+
+                    <div className="col-12" id="operations">
+                        <button type="reset" className="btn btn-primary">Reset</button>
+                        <button type="submit" className="btn btn-warning">Edit User</button>
+                    </div>
                 </Form>
             </div>
         </>
