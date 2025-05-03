@@ -2,6 +2,7 @@ import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import {useAuth} from "~/context/useAuth"
 import type {userProfile} from "~/models/all";
 import {NavbarSearch} from "~/components/NavbarSearch";
+import {Link} from "react-router";
 
 export default function Navigation() {
     const {isLoggedIn, getUserDetails} = useAuth()
@@ -16,6 +17,7 @@ export default function Navigation() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link key="garages" href="/garage">Garages</Nav.Link>
+                    <Link to="/about" className="nav-link">About</Link>
                 </Nav>
                 <Nav className="justify-content-center">
                     <NavbarSearch/>

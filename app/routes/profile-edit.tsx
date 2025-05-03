@@ -2,7 +2,7 @@ import type {Route} from "./+types/profile";
 import {getUser, updateUser} from "~/api";
 import type {callToAction} from "~/models/all";
 import CallToAction from "~/components/CallToAction";
-import {Form, useActionData, useLoaderData, useNavigate} from "react-router";
+import {Form, redirect, useActionData, useLoaderData, useNavigate} from "react-router";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -18,19 +18,17 @@ export async function clientLoader() {
 export async function clientAction({request}: Route.ClientActionArgs) {
     let formData = await request.formData();
     const obj = Object.fromEntries(formData.entries())
-    return await updateUser("", obj);
+    const result = await updateUser("", obj);
+    if (result.status == 200) {
+        return redirect("/profile");
+    }
+    return result;
 }
 
 export default function EditProfile() {
-    const navigate = useNavigate();
     const {user} = useLoaderData();
     const actionResults = useActionData();
     const errors = actionResults?.error;
-
-    //Cannot do this in clientAction
-    if (actionResults?.status == 200) {
-        navigate('/profile')
-    }
 
     const actions: callToAction[] = [
         {

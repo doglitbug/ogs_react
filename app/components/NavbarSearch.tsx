@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useSearchParams} from "react-router";
-import {Form, Button, InputGroup} from "react-bootstrap";
+import {Form, useNavigate, useSearchParams} from "react-router";
 
 export function NavbarSearch() {
     const navigate = useNavigate();
@@ -20,17 +19,17 @@ export function NavbarSearch() {
 
     return (
         <Form onSubmit={handleSubmit}>
-            <InputGroup>
-                <Form.Control
-                    type="search"
+            <div className="input-group">
+                <input
+                    type="text"
                     value={q}
+                    className="form-control"
                     onChange={(e) => setQ(e.target.value)}
                     placeholder="Search"
                     aria-label="Search"
                 />
-                <Button type="submit">Search</Button>
-            </InputGroup>
-
+                <button type="submit" className="btn btn-primary">Search</button>
+            </div>
         </Form>
     )
 }

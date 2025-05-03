@@ -9,10 +9,7 @@ import {
 
 import type {Route} from "./+types/root";
 import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
-import "./app.css"
 import "./public.css"
-import {Spinner} from "react-bootstrap";
 import {UserProvider} from "./context/useAuth";
 
 export const links: Route.LinksFunction = () => [
@@ -76,14 +73,17 @@ export default function App() {
                 <div className="container mainpage">
                     <Outlet/>
                 </div>
-                <Footer/>
             </UserProvider>
         </>
     );
 }
 
 export function HydrateFallback() {
-    return <Spinner animation="border"/>;
+    return (
+        <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </div>
+    )
 }
 
 export function ErrorBoundary({error}: Route.ErrorBoundaryProps) {

@@ -1,23 +1,21 @@
 import {Link} from "react-router";
 import type {searchResult} from "~/models/all";
-import Card from "react-bootstrap/Card";
 import {shortenText} from "~/components/Misc";
-import {CardFooter} from "react-bootstrap";
 
 export function ShowSearchResult(props: { searchResult: searchResult }) {
     const {searchResult} = props;
     return (
-        <Card className="mb-6 searchResult rounded">
-            <Card.Header>
-                <Card.Title>{searchResult['name']}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">{searchResult['location']}</Card.Subtitle>
-            </Card.Header>
-            <Card.Body>
-                <Card.Text>
+        <div className="card mb-6 searchResult rounded">
+            <div className="card-header">
+                <h5 className="card-title">{searchResult['name']}</h5>
+                <div className="card-subtitle mb-2 text-muted">{searchResult['location']}</div>
+            </div>
+            <div className="card-body">
+                <p className="card-text">
                     {shortenText(searchResult['description'])}
-                </Card.Text>
-            </Card.Body>
-            <Card.Footer><Link to={`/item/${searchResult['item_id']}`}>Go to item</Link></Card.Footer>
-        </Card>
+                </p>
+            </div>
+            <div className="card-footer"><Link to={`/item/${searchResult['item_id']}`} className="btn btn-primary">Go to item</Link></div>
+        </div>
     );
 }
