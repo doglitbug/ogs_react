@@ -59,7 +59,7 @@ export function Layout({children}: { children: React.ReactNode }) {
             <Meta/>
             <Links/>
         </head>
-        <body>
+        <body className="body">
         {children}
         <ScrollRestoration/>
         <Scripts/>
@@ -73,7 +73,7 @@ export default function App() {
         <>
             <UserProvider>
                 <Navigation/>
-                <div className="container">
+                <div className="container mainpage">
                     <Outlet/>
                 </div>
                 <Footer/>

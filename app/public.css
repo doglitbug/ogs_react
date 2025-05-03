@@ -1,9 +1,9 @@
-body {
-    background-color: lightblue;
+.body {
+    background-color: #93CCEA;
 }
 
-.container {
-    padding-top: 10px;
+.mainpage {
+    padding-top: 15px;
     padding-bottom: 50px;
 }
 
@@ -11,6 +11,7 @@ nav.navbar {
     background-color: cornflowerblue;
     padding-left: 50px;
     padding-right: 50px;
+    box-shadow: grey 5px 5px 5px 5px;
 }
 
 a.btn-social {
@@ -41,13 +42,14 @@ a.btn-facebook {
     border-width: 2px;
     border-radius: 10px;
     border-color: black;
+    box-shadow: grey 5px 5px;
     width: 100%;
-    padding: 5px 5px 0px;
+    padding: 5px 5px;
     margin-bottom: 10px;
     background-color: white;
 }
 
-.cta>.btn {
+.cta > .btn {
     margin-bottom: 5px;
 }
 
@@ -63,10 +65,38 @@ i.bi {
     padding-right: 5px;
 }
 
-.about>li {
+.about > li {
     list-style-type: square;
 }
 
 .garagePreview, .searchResult {
-    min-height: 250px;
+    height: 250px;
+}
+
+.rounded {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    border-color: black;
+    box-shadow: grey 5px 5px;
+    background-color: lightblue;
+    padding: 7px;
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+button {
+    margin-right: 8px;
+}
+
+.error {
+    color: red;
+}
+
+.error:before {
+    content: "\a ";
+    white-space: pre;
 }

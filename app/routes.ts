@@ -12,10 +12,11 @@ export default [
     route("search", "routes/search.tsx"),
 
     layout("routes/ProtectedRoute.tsx", [
-        route("user", "routes/user.tsx"),
         route("profile", "routes/profile.tsx"),
+        route("profile/edit", "routes/profile-edit.tsx"),
         route("logout", "routes/logout.tsx"),
     ]),
     route("login", "routes/login.tsx"),
+    route("register", "routes/register.tsx"),
     route("about", "routes/about.tsx"),
 ] satisfies RouteConfig;

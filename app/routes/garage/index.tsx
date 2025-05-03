@@ -3,7 +3,7 @@ import {getGarages} from "~/api";
 import ShowGaragePreview from "~/components/Garage";
 import type {garagePreview} from "~/models/all";
 
-export async function clientLoader({params}: Route.LoaderArgs) {
+export async function clientLoader() {
     return getGarages();
 }
 
@@ -16,7 +16,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Index({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
-        return showGarages(loaderData.data.garages.items);
+        return showGarages(loaderData.garages.results);
     } else {
         return (
             <>
@@ -34,7 +34,7 @@ function showGarages(garages: garagePreview[]) {
             <div className="row">
                 {garages.map(function (garage: garagePreview) {
                     return (
-                        <div className="col-lg-3 col-md-6" key={garage.garage_id}>
+                        <div className="col-xl-4 col-md-6" key={garage.garage_id}>
                             <ShowGaragePreview garage={garage}/>
                         </div>
                     )

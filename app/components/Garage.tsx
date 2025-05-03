@@ -6,18 +6,21 @@ import {shortenText} from "~/components/Misc";
 interface previewProps {
     garage: garagePreview;
 }
+
 export default function ShowGaragePreview(props: previewProps) {
     const {garage} = props;
     return (
-        <Card className="mb-6 garagePreview">
-            <Card.Body>
+        <Card className="mb-6 garagePreview rounded">
+            <Card.Header>
                 <Card.Title>{garage['name']}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{garage['location']}</Card.Subtitle>
+            </Card.Header>
+            <Card.Body>
                 <Card.Text>
                     {shortenText(garage['description'])}
                 </Card.Text>
-                <Link to={`/garage/${garage['garage_id']}`}>Go to Garage</Link>
             </Card.Body>
+            <Card.Footer><Link to={`/garage/${garage['garage_id']}`}>Go to Garage</Link></Card.Footer>
         </Card>
     );
 }
@@ -55,7 +58,11 @@ export function ShowGarage(garage: garage) {
                     <h2>Contact:</h2>
                     <table className="table table-hover">
                         <tbody>
-                        <tr><td> This is only available to registered users.<br />Please click <Link to="/login">here</Link> to log in or sign up</td></tr>
+                        <tr>
+                            <td> This is only available to registered users.<br/>Please click <Link
+                                to="/login">here</Link> to log in or sign up
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
