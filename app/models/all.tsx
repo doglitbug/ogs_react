@@ -51,3 +51,8 @@ export type callToAction = {
     variant: string;
     link: string;
 }
+
+export type location = {
+    location_id: number;
+    description: string;
+}

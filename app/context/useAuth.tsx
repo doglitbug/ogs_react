@@ -38,8 +38,6 @@ export const UserProvider = ({children}: Props) => {
 
     //const registerUser = async...
     // TODO https://www.youtube.com/watch?v=h3_YKC2VGfE&list=PL82C6-O4XrHcJhPkcWkzFnjEBiAtpWGrw&index=2
-
-    //TODO refactor this to use status codes and the API
     async function loginUser(username: string, password: string) {
         let result: any = await doLoginUser({username, password});
         if (result.status == 200) {

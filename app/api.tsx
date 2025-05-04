@@ -65,7 +65,7 @@ export const updateUser = async (id: string = "", body: any) => {
 }
 //#endregion
 
-//#region Garages
+//#region garage
 /**
  * Get data for a Garage
  * @returns
@@ -83,7 +83,7 @@ export const getGarages = async () => {
 }
 //#endregion
 
-//#region Items
+//#region item
 /**
  * Get data for a item
  * @returns
@@ -101,12 +101,19 @@ export const getItems = async () => {
 }
 //#endregion
 
-//#region Search
+//#region search
 /**
  * Perform a search
  * @returns
  */
 export const getSearch = async (search: string) => {
     return doGetCall("search?" + search);
+}
+//#endregion
+
+//#region Misc
+
+export const getLocations = async() => {
+    return doGetCall("location");
 }
 //#endregion

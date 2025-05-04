@@ -2,12 +2,9 @@ import {getSearch} from "~/api";
 import type {Route} from "../../.react-router/types/app/routes/+types/search";
 import type {searchResult} from "~/models/all";
 import {ShowSearchResult} from "~/components/SearchResult";
-import {InputGroup} from "react-bootstrap";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import {useAuth} from "~/context/useAuth";
 import {useEffect, useState} from "react";
-import {useSearchParams} from "react-router";
+import {Form, useSearchParams} from "react-router";
 
 export async function clientLoader({request}: Route.LoaderArgs) {
     const searchParams = new URL(request.url).searchParams;
@@ -49,56 +46,55 @@ export default function Search({loaderData}: Route.ComponentProps) {
     return (
         <>
             <h1>Search results:</h1>
-            <Form onSubmit={handleSubmit} className="rounded">
-                <div className="row">
-                    <div className="col-sm-12 col-lg-3">
-                        <InputGroup>
-                            <InputGroup.Text>I want to</InputGroup.Text>
-                            <Form.Select id="method"
-                                         value={parameters.method}
-                                         aria-label="Buying or Selling"
-                                         onChange={(e) => setParameters({...parameters, method: e.target.value})}
-                            >
-                                <option value="buy">buy</option>
-                                <option value="sell">sell</option>
-                                <option value="either">buy or sell</option>
-                            </Form.Select>
-                        </InputGroup>
+            <div className="rounded">
+                <Form onSubmit={handleSubmit} className="row g-3">
+
+                    <div className="col-md-12 col-lg-3 form-floating">
+                        <select id="method"
+                                className="form-select"
+                                value={parameters.method}
+                                aria-label="Buying or Selling"
+                                onChange={(e) => setParameters({...parameters, method: e.target.value})}
+                        >
+                            <option value="buy">buy</option>
+                            <option value="sell">sell</option>
+                            <option value="either">buy or sell</option>
+                        </select>
+                        <label htmlFor="method">I want to</label>
                     </div>
 
-                    <div className="col-sm-12 col-lg-4">
-                        <InputGroup>
-                            <Form.Control
-                                id="search"
-                                type="search"
-                                value={parameters.q}
-                                onChange={(e) => setParameters({...parameters, q: e.target.value})}
-                                placeholder="Search"
-                                aria-label="Search"
-                            />
-                        </InputGroup>
+                    <div className="col-md-12 col-lg-4 form-floating">
+                        <input
+                            id="search"
+                            type="search"
+                            className="form-control"
+                            value={parameters.q}
+                            onChange={(e) => setParameters({...parameters, q: e.target.value})}
+                            placeholder="Search"
+                            aria-label="Search"
+                        />
+                        <label htmlFor="search"></label>
                     </div>
 
-                    <div className="col-sm-12 col-lg-4">
-                        <InputGroup>
-                            <InputGroup.Text>in</InputGroup.Text>
-                            <Form.Control
-                                id="location"
-                                type="search"
-                                value={parameters.location}
-                                onChange={(e) => setParameters({...parameters, location: e.target.value})}
-                                placeholder="Location"
-                                aria-label="Location"
-                            />
-
-                        </InputGroup>
+                    <div className="col-md-12 col-lg-4 form-floating">
+                        <input
+                            id="location"
+                            type="search"
+                            className="form-control"
+                            value={parameters.location}
+                            onChange={(e) => setParameters({...parameters, location: e.target.value})}
+                            placeholder="Location"
+                            aria-label="Location"
+                        />
+                        <label htmlFor="location">in/from</label>
                     </div>
 
                     <div className="col-sm-2 col-lg-1">
-                        <Button type="submit">Find</Button>
+                        <button type="submit" className="btn btn-primary">Search</button>
                     </div>
-                </div>
-            </Form>
+
+                </Form>
+            </div>
 
             {error && (<div className={"error"}>
                 {error}
@@ -114,6 +110,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
                         )
                     })}
                 </div>)}
+
         </>
     )
 }

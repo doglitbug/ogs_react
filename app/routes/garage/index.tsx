@@ -16,13 +16,10 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Index({loaderData}: Route.ComponentProps) {
     if (loaderData != null && loaderData.status == 200) {
-        return showGarages(loaderData.garages.results);
+        return showGarages(loaderData.garage);
     } else {
         return (
-            <>
-                <h1>Garages</h1>
-                <p>No garages found!</p>
-            </>
+            <>Loading</>
         )
     }
 }

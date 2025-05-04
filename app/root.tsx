@@ -13,7 +13,6 @@ import "./public.css"
 import {UserProvider} from "./context/useAuth";
 
 export const links: Route.LinksFunction = () => [
-    {rel: "preconnect", href: "https://fonts.googleapis.com"},
     {
         rel: "preconnect",
         href: "https://fonts.gstatic.com",
@@ -24,12 +23,6 @@ export const links: Route.LinksFunction = () => [
         href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
     },
     {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css",
-        integrity: "sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH",
-        crossOrigin: "anonymous",
-    },
-    {
         rel: "script",
         href: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js",
     },
@@ -38,13 +31,9 @@ export const links: Route.LinksFunction = () => [
         href: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
     },
     {
-        rel: "script",
-        href: "https://cdn.jsdelivr.net/npm/react-bootstrap@next/dist/react-bootstrap.min.js",
-    },
-    {
         rel: "stylesheet",
         href: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
-    },
+    }
 ];
 
 export function Layout({children}: { children: React.ReactNode }) {
@@ -55,6 +44,12 @@ export function Layout({children}: { children: React.ReactNode }) {
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <Meta/>
             <Links/>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+                  integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+                  crossOrigin="anonymous"/>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+                        crossOrigin="anonymous"></script>
         </head>
         <body className="body">
         {children}

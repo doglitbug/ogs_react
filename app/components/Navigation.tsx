@@ -1,4 +1,3 @@
-import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import {useAuth} from "~/context/useAuth"
 import type {userProfile} from "~/models/all";
 import {NavbarSearch} from "~/components/NavbarSearch";
@@ -8,40 +7,56 @@ export default function Navigation() {
     const {isLoggedIn, getUserDetails} = useAuth()
 
     return (
-        <Navbar expand="lg" sticky="top" id="navigation">
-            <Navbar.Brand href="/">
-                <span className="d-lg-inline-block d-none">Online Garage Sale</span>
-                <span className="d-inline-block d-lg-none">OGS</span>
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link key="garages" href="/garage">Garages</Nav.Link>
-                    <Link to="/about" className="nav-link">About</Link>
-                </Nav>
-                <Nav className="justify-content-center">
-                    <NavbarSearch/>
-                    {isLoggedIn() ? profileLinks(getUserDetails()) :
-                        <>
-                            <Nav.Link key="register" href="/register">Register</Nav.Link>
-                            <Nav.Link key="login" href="/login">Log in</Nav.Link>
-                        </>
-                    }
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
+        <nav className="navbar navbar-expand-md">
+            <div className="container-fluid">
+                <Link className="navbar-brand" to="/">
+                    <span className="d-md-inline-block d-none">Online Garage Sale</span>
+                    <span className="d-inline-block d-md-none">OGS</span>
+                </Link>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <Link to="/garage" className="nav-link">Garages</Link>
+                        <Link to="/about" className="nav-link">About</Link>
+                    </ul>
+                    <div className="justify-content-center">
+                        <ul className="navbar-nav">
+                            <NavbarSearch/>
+                            {isLoggedIn() ? profileLinks(getUserDetails()) :
+                                <>
+                                    <Link to="/register" className="nav-link">Register</Link>
+                                    <Link to="/login" className="nav-link">Log in</Link>
+                                </>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
     );
 }
 
 function profileLinks(getUserDetails: userProfile | null) {
     return (
-        <NavDropdown title="Logged in" id="user-dropdown" align="end">
-            <NavDropdown.Header>{getUserDetails?.name}</NavDropdown.Header>
-            <NavDropdown.Item href="/profile">Show Profile</NavDropdown.Item>
-            <NavDropdown.Divider/>
-            <NavDropdown.Item href="/logout">
-                Log out
-            </NavDropdown.Item>
-        </NavDropdown>
+        <>
+            <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                    Logged in
+                </a>
+                <ul className="dropdown-menu">
+                    <li>
+                        <div className="dropdown-header">{getUserDetails?.name}</div>
+                    </li>
+                    <li><Link className="dropdown-item" to="/profile">Show Profile</Link></li>
+                    <li><hr className="dropdown-divider"/></li>
+                    <li><Link className="dropdown-item" to="/logout">Log out</Link></li>
+                </ul>
+            </li>
+        </>
     )
 }

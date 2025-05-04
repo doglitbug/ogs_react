@@ -23,7 +23,6 @@ export default function Login() {
         if (result.status == 200) {
             navigate("/profile");
         } else {
-            console.log(result);
             setErrors(result.error);
         }
     }
