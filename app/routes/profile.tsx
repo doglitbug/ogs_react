@@ -1,7 +1,8 @@
 import type {Route} from "./+types/profile";
 import {getUser} from "~/api";
-import type {callToAction, userProfile} from "~/models/all";
+import type {callToAction, user} from "~/models/all";
 import CallToAction from "~/components/CallToAction";
+import {useLoaderData} from "react-router";
 
 export async function clientLoader({params}: Route.LoaderArgs) {
     return getUser();
@@ -15,16 +16,8 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Profile({loaderData}: Route.ComponentProps) {
-    if (loaderData != null && loaderData.status == 200) {
-        return ShowProfile(loaderData.user);
-    } else {
-        return (
-            <h1>Loading</h1>
-        )
-    }
-}
+    const {user} = useLoaderData();
 
-function ShowProfile(user: userProfile) {
     const actions: callToAction[] = [
         {
             text: "Back",

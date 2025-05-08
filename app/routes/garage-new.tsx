@@ -7,12 +7,12 @@ export function meta({}: Route.MetaArgs) {
     ];
 }
 
-export default function GarageNew({loaderData}: Route.ComponentProps) {
+export default function GarageNew() {
 
     return (
         <>
             <h1>New Garage</h1>
+            <p>TODO</p>
         </>
     )
-
 }

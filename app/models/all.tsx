@@ -1,4 +1,4 @@
-export type userProfile = {
+export type user = {
     username: string;
     name: string;
     email: string;
@@ -20,14 +20,8 @@ export type garage = {
     name: string;
     location: string;
     description: string;
-    visible: boolean;
     garage_id: number;
-}
-
-export type itemPreview = {
-    name: string;
-    description: string;
-    item_id: number;
+    staff: user[];
 }
 
 export type item = {

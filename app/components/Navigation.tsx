@@ -1,5 +1,5 @@
 import {useAuth} from "~/context/useAuth"
-import type {userProfile} from "~/models/all";
+import type {user} from "~/models/all";
 import {NavbarSearch} from "~/components/NavbarSearch";
 import {Link} from "react-router";
 
@@ -40,7 +40,7 @@ export default function Navigation() {
     );
 }
 
-function profileLinks(getUserDetails: userProfile | null) {
+function profileLinks(getUserDetails: user | null) {
     return (
         <>
             <li className="nav-item dropdown">

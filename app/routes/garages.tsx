@@ -1,10 +1,10 @@
 import type {Route} from "./+types/garages";
 import {getGarages} from "~/api";
-import ShowGaragePreview from "~/components/Garage";
 import type {callToAction, garagePreview} from "~/models/all";
-import {useLoaderData} from "react-router";
+import {Link, useLoaderData} from "react-router";
 import CallToAction from "~/components/CallToAction";
 import {useAuth} from "~/context/useAuth";
+import {shortenText} from "~/components/Misc";
 
 export async function clientLoader() {
     return getGarages();
@@ -17,7 +17,7 @@ export function meta({}: Route.MetaArgs) {
     ];
 }
 
-export default function Garages({loaderData}: Route.ComponentProps) {
+export default function Garages() {
     const {garages} = useLoaderData();
     const {isLoggedIn} = useAuth();
 
@@ -58,5 +58,24 @@ export default function Garages({loaderData}: Route.ComponentProps) {
                 })}
             </div>
         </>
+    );
+}
+
+function ShowGaragePreview(props: { garage: garagePreview }) {
+    const {garage} = props;
+    return (
+        <div className="card mb-6 garagePreview rounded">
+            <div className="card-header">
+                <h5 className="card-title">{garage['name']}</h5>
+                <div className="card-subtitle">{garage['location']}</div>
+            </div>
+            <div className="card-body">
+                <p className="card-text">
+                    {shortenText(garage['description'])}
+                </p>
+            </div>
+            <div className="card-footer"><Link to={`/garage/${garage['garage_id']}`} className="btn btn-primary">Go to
+                Garage</Link></div>
+        </div>
     );
 }

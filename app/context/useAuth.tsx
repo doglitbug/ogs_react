@@ -1,16 +1,16 @@
 import React, {createContext, useEffect, useState} from "react";
-import type {userProfile} from "~/models/all";
+import type {user} from "~/models/all";
 import {jwtDecode} from "jwt-decode";
 import {doLoginUser} from "~/api";
 
 type UserContextType = {
     token: string | null;
-    user: userProfile | null;
+    user: user | null;
     //registerUser(username: string, email: string, password: string) => void;
     loginUser: (username: string, password: string) => any;
     logoutUser: () => void;
     isLoggedIn: () => boolean;
-    getUserDetails: () => userProfile | null;
+    getUserDetails: () => user | null;
     //isAdmin: () => boolean;
 };
 
@@ -22,7 +22,7 @@ export const UserProvider = ({children}: Props) => {
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const [token, setToken] = useState<string | null>(null);
-    const [user, setUser] = useState<userProfile | null>(null);
+    const [user, setUser] = useState<user | null>(null);
     const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export const UserProvider = ({children}: Props) => {
         if (result.status == 200) {
             localStorage.setItem('token', result.token)
             setToken(result.token)
-            const user = jwtDecode<userProfile>(result.token);
+            const user = jwtDecode<user>(result.token);
             localStorage.setItem('user', JSON.stringify(user));
             setUser(user);
         }
