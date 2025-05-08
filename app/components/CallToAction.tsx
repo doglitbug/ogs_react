@@ -14,6 +14,7 @@ export default function CallToAction(props: callToActionProps) {
                 return (
                     <Link to={action.link} key={action.link + action.text}>
                         <button type="button" className={"btn btn-" + action.variant}>
+                            {action.icon !== "" && <i className={"bi bi-" + action.icon}></i>}
                             {action.text}
                         </button>
                     </Link>

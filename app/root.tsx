@@ -31,8 +31,8 @@ export const links: Route.LinksFunction = () => [
         href: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
     },
     {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
+        rel:"stylesheet",
+        href: "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css",
     }
 ];
 

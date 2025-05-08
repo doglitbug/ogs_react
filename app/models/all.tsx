@@ -49,6 +49,7 @@ export type searchResult = {
 export type callToAction = {
     text: string;
     variant: string;
+    icon: string;
     link: string;
 }
 

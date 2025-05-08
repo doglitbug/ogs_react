@@ -8,7 +8,6 @@ import {Form, useSearchParams} from "react-router";
 
 export async function clientLoader({request}: Route.LoaderArgs) {
     const searchParams = new URL(request.url).searchParams;
-    console.log(searchParams.toString());
 
     return getSearch(searchParams.toString());
 }
@@ -35,7 +34,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
         })
     }, [searchParams])
 
-    const results = loaderData?.search?.results;
+    const results = loaderData?.search;
     const error = loaderData?.error;
 
     function handleSubmit(event: any) {

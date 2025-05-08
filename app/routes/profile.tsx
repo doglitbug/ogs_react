@@ -29,16 +29,19 @@ function ShowProfile(user: userProfile) {
         {
             text: "Back",
             variant: "primary",
+            icon: "arrow-left",
             link: "/"
         },
         {
             text: "Edit",
             variant: "warning",
+            icon: "pencil",
             link: "/profile/edit"
         },
         {
             text: "Delete",
             variant: "danger",
+            icon: "trash3",
             link: "/profile/delete"
         },
     ];

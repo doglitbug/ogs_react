@@ -26,7 +26,7 @@ export async function clientAction({request}: Route.ClientActionArgs) {
     return result;
 }
 
-export default function EditProfile() {
+export default function ProfileEdit() {
     const {user} = useLoaderData();
     const actionResults = useActionData();
     const errors = actionResults?.error;
@@ -34,7 +34,7 @@ export default function EditProfile() {
 
     useEffect(() => {
         getLocations().then((response) => {
-                setLocations(response.location);
+                setLocations(response.locations);
             }
         )
     }, []);
@@ -43,11 +43,13 @@ export default function EditProfile() {
         {
             text: "Back",
             variant: "primary",
+            icon: "arrow-left",
             link: "/profile"
         },
         {
             text: "Delete",
             variant: "danger",
+            icon: "trash3",
             link: "/profile/delete"
         },
     ]

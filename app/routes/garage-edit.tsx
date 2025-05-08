@@ -1,4 +1,4 @@
-import type { Route } from "../../../.react-router/types/app/routes/garage/+types";
+import type { Route } from "./+types/garage";
 import { getGarage } from "~/api";
 import {ShowGarage} from "~/components/Garage";
 
@@ -8,12 +8,12 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
 
 export function meta({ }: Route.MetaArgs) {
     return [
-        { title: "Online Garage Sale" },
+        { title: "Online Garage Sale: Edit Garage" },
         { name: "description", content: "Welcome to the Online Garage Sale!" },
     ];
 }
 
-export default function Show({ loaderData }: Route.ComponentProps) {
+export default function GarageEdit({ loaderData }: Route.ComponentProps) {
     if (loaderData != null && loaderData.status==200) {
         return ShowGarage(loaderData.garage);
     } else {
