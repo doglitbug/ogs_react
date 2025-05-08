@@ -43,46 +43,35 @@ export default function Garage() {
         <>
             <h1>Show Garage: {garage['name']}</h1>
             <CallToAction actions={actions}/>
-            <div className="rounded">
-                <div className="row">
-                    <div className="col-md-6">
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="rounded">
                         <h2>Details:</h2>
-                        <table className="table table-hover">
-                            <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <td>{garage['name']}</td>
-                            </tr>
-                            <tr>
-                                <th>Location</th>
-                                <td>{garage['location']}</td>
-                            </tr>
-                            <tr>
-                                <th>Visible</th>
-                                <td>{garage['visible'] ? 'Visible to public' : 'Hidden from public'}</td>
-                            </tr>
-
-                            <tr>
-                                <th>Description</th>
-                                <td>{garage['description']}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="col-md-6">
-                        <h2>Contact:</h2>
-                        <table className="table table-hover">
-                            <tbody>
-                            <tr>
-                                <td> This is only available to registered users.<br/>Please click <Link
-                                    to="/login">here</Link> to log in or sign up
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <dl>
+                            <dt>Name</dt>
+                            <dd>{garage.name}</dd>
+                            <dt>Location</dt>
+                            <dd>{garage.location}</dd>
+                            <dt>Description</dt>
+                            <dd>{garage.description}</dd>
+                        </dl>
                     </div>
                 </div>
+                <div className="col-md-6">
+                    <div className="rounded">
+                        <h2>Contact:</h2>
+                        Only available to registered users
+                        {garage.staff.map(function(staff: user){
+                            return (
+                              <div>{staff.username}</div>
+                            );
+                        })}
+                    </div>
+                </div>
+
             </div>
+
+            <h2>TODO Garage Items and filter here</h2>
         </>
     )
 }

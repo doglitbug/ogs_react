@@ -81,6 +81,14 @@ export const getGarage = async (id: string) => {
 export const getGarages = async () => {
     return doGetCall("garage/");
 }
+
+export const createGarage = async (body: any) => {
+    return doPostCall("garage/", body);
+}
+
+export const updateGarage = async (id: string, body: any) => {
+    return doPutCall("garage/" + id, body);
+}
 //#endregion
 
 //#region item

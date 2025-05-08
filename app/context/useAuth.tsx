@@ -10,7 +10,6 @@ type UserContextType = {
     loginUser: (username: string, password: string) => any;
     logoutUser: () => void;
     isLoggedIn: () => boolean;
-    getUserDetails: () => user | null;
     //isAdmin: () => boolean;
 };
 
@@ -19,7 +18,6 @@ type Props = { children: React.ReactNode };
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
 export const UserProvider = ({children}: Props) => {
-    const apiUrl = import.meta.env.VITE_API_URL;
 
     const [token, setToken] = useState<string | null>(null);
     const [user, setUser] = useState<user | null>(null);
@@ -62,7 +60,7 @@ export const UserProvider = ({children}: Props) => {
     }
 
     const isLoggedIn = () => {
-        return !!token;
+        return !!user;
     }
 
     const getUserDetails = () => {
@@ -70,7 +68,7 @@ export const UserProvider = ({children}: Props) => {
     }
 
     return (
-        <UserContext.Provider value={{token, user, loginUser, logoutUser, isLoggedIn, getUserDetails}}>
+        <UserContext.Provider value={{token, user, loginUser, logoutUser, isLoggedIn}}>
             {isReady ? children : null}
         </UserContext.Provider>
     );

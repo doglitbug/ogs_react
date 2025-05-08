@@ -20,7 +20,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Search({loaderData}: Route.ComponentProps) {
-    const {getUserDetails} = useAuth();
+    const {user} = useAuth();
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [parameters, setParameters] = useState({q: '', method: '', location: ''})
@@ -30,7 +30,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
         setParameters({
             q: searchParams.get('q') ?? '',
             method: searchParams.get('method') ?? 'buy',
-            location: searchParams.get('location') ?? getUserDetails()?.location ?? ''
+            location: searchParams.get('location') ?? user?.location ?? ''
         })
     }, [searchParams])
 

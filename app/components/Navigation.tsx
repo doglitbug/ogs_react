@@ -4,7 +4,7 @@ import {NavbarSearch} from "~/components/NavbarSearch";
 import {Link} from "react-router";
 
 export default function Navigation() {
-    const {isLoggedIn, getUserDetails} = useAuth()
+    const {isLoggedIn, user} = useAuth()
 
     return (
         <nav className="navbar navbar-expand-md">
@@ -26,7 +26,7 @@ export default function Navigation() {
                     <div className="justify-content-center">
                         <ul className="navbar-nav">
                             <NavbarSearch/>
-                            {isLoggedIn() ? profileLinks(getUserDetails()) :
+                            {isLoggedIn() ? profileLinks(user) :
                                 <>
                                     <Link to="/register" className="nav-link">Register</Link>
                                     <Link to="/login" className="nav-link">Log in</Link>
@@ -40,7 +40,7 @@ export default function Navigation() {
     );
 }
 
-function profileLinks(getUserDetails: user | null) {
+function profileLinks(user: user | null) {
     return (
         <>
             <li className="nav-item dropdown">
@@ -50,7 +50,7 @@ function profileLinks(getUserDetails: user | null) {
                 </a>
                 <ul className="dropdown-menu">
                     <li>
-                        <div className="dropdown-header">{getUserDetails?.name}</div>
+                        <div className="dropdown-header">{user?.name}</div>
                     </li>
                     <li><Link className="dropdown-item" to="/profile">Show Profile</Link></li>
                     <li><hr className="dropdown-divider"/></li>
