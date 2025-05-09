@@ -6,6 +6,7 @@ export type user = {
     location_id: number;
     location: string;
     role: string;
+    access: string | null;
     description: string;
 };
 

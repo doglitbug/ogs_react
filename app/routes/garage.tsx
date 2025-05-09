@@ -3,6 +3,7 @@ import {getGarage} from "~/api";
 import type {callToAction, user} from "~/models/all";
 import {Link, useLoaderData} from "react-router";
 import CallToAction from "~/components/CallToAction";
+import {useAuth} from "~/context/useAuth";
 
 export async function clientLoader({params}: Route.LoaderArgs) {
     return getGarage(params.garageId ? params.garageId : "");
@@ -17,13 +18,14 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Garage() {
     const {garage} = useLoaderData();
+    const {isLoggedIn} = useAuth();
 
     const actions: callToAction[] = [
         {
             text: "Back",
             variant: "primary",
             icon: "arrow-left",
-            link: "/"
+            link: "/garage"
         },
         {
             text: "Edit",
@@ -60,12 +62,17 @@ export default function Garage() {
                 <div className="col-md-6">
                     <div className="rounded">
                         <h2>Contact:</h2>
-                        Only available to registered users
-                        {garage.staff.map(function(staff: user){
-                            return (
-                              <div>{staff.username}</div>
-                            );
-                        })}
+                        {isLoggedIn() ?
+                            <ul>
+                                {garage.staff.map(function (staff: user) {
+                                    return (
+                                        <li key={staff.user_id}>{staff.access}: {staff.name} ({staff.username})&nbsp;<a
+                                            href={"mailto:" + staff.email}>Email</a>
+                                        </li>
+                                    );
+                                })}
+                            </ul> : <>Only available to registered users</>
+                        }
                     </div>
                 </div>
 
