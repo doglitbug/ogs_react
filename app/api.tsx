@@ -26,7 +26,7 @@ async function doPostCall(api: string, body: any) {
         method: 'POST',
         headers: headers(),
         body: JSON.stringify(body),
-    })
+    });
 
     const statusCode = response.status;
     const data = await response.json();
@@ -104,8 +104,8 @@ export const getItem = async (id: string) => {
  * Get data for all Items
  * @returns
  */
-export const getItems = async () => {
-    return doGetCall("item/");
+export const getItems = async (params: string) => {
+    return doGetCall("item" + params);
 }
 //#endregion
 
@@ -121,7 +121,7 @@ export const getSearch = async (search: string) => {
 
 //#region Misc
 
-export const getLocations = async() => {
+export const getLocations = async () => {
     return doGetCall("location");
 }
 //#endregion

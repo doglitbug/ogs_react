@@ -45,13 +45,13 @@ export default function GarageEdit() {
             text: "Back",
             variant: "primary",
             icon: "arrow-left",
-            link: "/garage"
+            link: "/garage/" + garage.garage_id
         }
     ]
 
     //Required to set selected location to current value
     if (!garage || !locations) {
-        return <>Loading</>
+        return <>Loading...</>
     }
 
     return (

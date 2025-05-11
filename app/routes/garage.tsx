@@ -1,12 +1,23 @@
 import type {Route} from "./+types/garage";
-import {getGarage} from "~/api";
-import type {callToAction, user} from "~/models/all";
-import {Link, useLoaderData} from "react-router";
+import {getGarage, getItems} from "~/api";
+import type {callToAction, user, item} from "~/models/all";
+import {useLoaderData} from "react-router";
 import CallToAction from "~/components/CallToAction";
 import {useAuth} from "~/context/useAuth";
+import {ShowSearchResult} from "~/components/SearchResult";
+import Pagination from "~/components/Pagination";
 
-export async function clientLoader({params}: Route.LoaderArgs) {
-    return getGarage(params.garageId ? params.garageId : "");
+export async function clientLoader({params, request}: Route.LoaderArgs) {
+    const garage = await getGarage(params.garageId ? params.garageId : "");
+    //TODO Check garage is valid?
+
+    let page = new URL(request.url).searchParams.get("page") ?? "1";
+
+    let parameters = "?garage_id=" + params.garageId;
+    parameters += "&page=" + page;
+
+    const items = await getItems(parameters);
+    return [garage, items];
 }
 
 export function meta({}: Route.MetaArgs) {
@@ -17,7 +28,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Garage() {
-    const {garage} = useLoaderData();
+    const [{garage}, itemsResult] = useLoaderData();
     const {isLoggedIn} = useAuth();
 
     const actions: callToAction[] = [
@@ -40,6 +51,10 @@ export default function Garage() {
             link: "/garage/" + garage.garage_id + "/delete"
         },
     ];
+
+    if (!garage || !itemsResult) {
+        return <>Loading...</>
+    }
 
     return (
         <>
@@ -71,14 +86,30 @@ export default function Garage() {
                                         </li>
                                     );
                                 })}
-                            </ul> : <>Only available to registered users</>
+                            </ul> : <>Only available to registered users, please log in</>
                         }
                     </div>
                 </div>
 
             </div>
 
-            <h2>TODO Garage Items and filter here</h2>
+            <h2>Garage Items:</h2>
+            {itemsResult.error && (<div className={"error"}>
+                {itemsResult.error}
+            </div>)}
+
+            {itemsResult.items && (
+                <div className="row">
+                    {itemsResult.items?.map(function (item: item) {
+                        return (
+                            <div className="col-xl-4 col-md-6" key={item.item_id}>
+                                <ShowSearchResult searchResult={item}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )}
+            <div className="centered"><Pagination totalItems={itemsResult.total_items}/></div>
         </>
     )
 }

@@ -5,6 +5,7 @@ import {ShowSearchResult} from "~/components/SearchResult";
 import {useAuth} from "~/context/useAuth";
 import {useEffect, useState} from "react";
 import {Form, useSearchParams} from "react-router";
+import Pagination from "~/components/Pagination";
 
 export async function clientLoader({request}: Route.LoaderArgs) {
     const searchParams = new URL(request.url).searchParams;
@@ -108,6 +109,7 @@ export default function Search({loaderData}: Route.ComponentProps) {
                             </div>
                         )
                     })}
+                    <Pagination totalItems={loaderData?.total_items}/>
                 </div>)}
 
         </>
